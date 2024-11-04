@@ -264,7 +264,6 @@ class API extends \Piwik\Plugin\API
 
     private function buildDataTable($idSites, $period, $date, $segment, $_restrictSitesToLogin, $enhanced, $multipleWebsitesRequested, $showColumns)
     {
-        /*
         // build the archive type used to query archive data
         $archive = Archive::build(
             $idSites,
@@ -273,7 +272,7 @@ class API extends \Piwik\Plugin\API
             $segment,
             $_restrictSitesToLogin
         );
-        */
+
         // determine what data will be displayed
         $fieldsToGet = array();
         $columnNameRewrites = array();
@@ -291,13 +290,31 @@ class API extends \Piwik\Plugin\API
                 $apiECommerceMetrics[$metricName] = $metricSettings;
             }
         }
-        /*
-        $dataTable = $archive->getDataTableFromNumericAndMergeChildren($fieldsToGet);
 
-        $this->populateLabel($dataTable);
-        */
+        $dataTable = $archive->getDataTable('MultiSites_AllWebsitesDashboard')->mergeChildren();
+        $foundSites = [];
 
-        $dataTable = Archive::createDataTableFromArchiveAWD('MultiSites_AllWebsitesDashboard', 0, $period, $date, $segment);
+        foreach ($dataTable as $row) {
+            $foundSites[] = $row->getMetadata('idsite');
+        }
+
+        $missingSites = array_diff($idSites, $foundSites);
+
+        foreach ($missingSites as $missingIdSite) {
+            $dataTable->addRow(new Row([
+                Row::COLUMNS => [
+                    'label' => $missingIdSite,
+                    'nb_visits' => 0,
+                    'nb_visits' => 0,
+                    'nb_actions' => 0,
+                    'Actions_nb_pageviews' => 0,
+                    'Goal_revenue' => 0,
+                    'Goal_nb_conversions' => 0,
+                    'Goal_0_nb_conversions' => 0,
+                    'Goal_0_revenue' => 0,
+                ],
+            ]));
+        }
 
         $totalMetrics = $this->preformatApiMetricsForTotalsCalculation($apiMetrics);
         $this->setMetricsTotalsMetadata($dataTable, $totalMetrics);
@@ -314,11 +331,8 @@ class API extends \Piwik\Plugin\API
                 $dataTable->setMetadata(self::getLastPeriodMetadataName('date'), $lastPeriod);
             }
 
-            /*
             $pastArchive = Archive::build($idSites, $period, $strLastDate, $segment, $_restrictSitesToLogin);
-            $pastData = $pastArchive->getDataTableFromNumericAndMergeChildren($fieldsToGet);
-            */
-            $pastData = Archive::createDataTableFromArchiveAWD('MultiSites_AllWebsitesDashboard', 0, $period, $strLastDate, $segment);
+            $pastData = $pastArchive->getDataTable('MultiSites_AllWebsitesDashboard')->mergeChildren();
 
             $this->populateLabel($pastData); // labels are needed to calculate evolution
             $this->calculateEvolutionPercentages($dataTable, $pastData, $apiMetrics);
@@ -327,12 +341,6 @@ class API extends \Piwik\Plugin\API
             if ($dataTable instanceof DataTable) {
                 // needed for MultiSites\Dashboard
                 $dataTable->setMetadata('pastData', $pastData);
-            }
-        }
-
-        foreach ($dataTable->getRows() as $idRow => $row) {
-            if (!in_array($row->getMetadata('idsite'), $idSites)) {
-                $dataTable->deleteRow($idRow);
             }
         }
 

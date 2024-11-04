@@ -305,7 +305,7 @@ class Access
             }
         }
 
-        $this->idsitesByAccess['superuser'][] = 0;
+        // $this->idsitesByAccess['superuser'][] = 0;
     }
 
     /**
