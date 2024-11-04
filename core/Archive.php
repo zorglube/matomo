@@ -18,6 +18,7 @@ use Piwik\ArchiveProcessor\Rules;
 use Piwik\Container\StaticContainer;
 use Piwik\DataAccess\ArchiveSelector;
 use Piwik\DataAccess\ArchiveWriter;
+use Piwik\Period\Factory as PeriodFactory;
 use Piwik\Plugins\CoreAdminHome\API;
 
 /**
@@ -539,6 +540,30 @@ class Archive implements ArchiveQuery
         return $dataTable;
     }
 
+    public static function createDataTableFromArchiveAWD($recordName, $idSite, $period, $date, $segment, $expanded = false, $flat = false, $idSubtable = null, $depth = null)
+    {
+        if ('range' !== $period) {
+            return self::createDataTableFromArchive($recordName, $idSite, $period, $date, $segment, $expanded, $flat, $idSubtable, $depth);
+        }
+
+        $range = PeriodFactory::build($period, $date);
+        $rangeDay = $range->getDateStart();
+        $dataTable = null;
+
+        do {
+            $periodTable = self::createDataTableFromArchive($recordName, $idSite, 'day', $rangeDay->toString(), $segment, $expanded, $flat, $idSubtable, $depth);
+
+            if (null === $dataTable) {
+                $dataTable = $periodTable;
+            } else {
+                $dataTable->addDataTable($periodTable);
+            }
+
+            $rangeDay = $rangeDay->addDay(1);
+        } while ($range->isDateInPeriod($rangeDay));
+
+        return $dataTable;
+    }
 
     /**
      * Queries archive tables for data and returns the result.

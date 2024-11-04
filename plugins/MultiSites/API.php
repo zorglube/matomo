@@ -297,7 +297,7 @@ class API extends \Piwik\Plugin\API
         $this->populateLabel($dataTable);
         */
 
-        $dataTable = Archive::createDataTableFromArchive('MultiSites_AllWebsitesDashboard', 0, $period, $date, $segment);
+        $dataTable = Archive::createDataTableFromArchiveAWD('MultiSites_AllWebsitesDashboard', 0, $period, $date, $segment);
 
         $totalMetrics = $this->preformatApiMetricsForTotalsCalculation($apiMetrics);
         $this->setMetricsTotalsMetadata($dataTable, $totalMetrics);
@@ -318,7 +318,7 @@ class API extends \Piwik\Plugin\API
             $pastArchive = Archive::build($idSites, $period, $strLastDate, $segment, $_restrictSitesToLogin);
             $pastData = $pastArchive->getDataTableFromNumericAndMergeChildren($fieldsToGet);
             */
-            $pastData = Archive::createDataTableFromArchive('MultiSites_AllWebsitesDashboard', 0, $period, $strLastDate, $segment);
+            $pastData = Archive::createDataTableFromArchiveAWD('MultiSites_AllWebsitesDashboard', 0, $period, $strLastDate, $segment);
 
             $this->populateLabel($pastData); // labels are needed to calculate evolution
             $this->calculateEvolutionPercentages($dataTable, $pastData, $apiMetrics);
