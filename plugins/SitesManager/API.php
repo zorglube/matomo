@@ -290,12 +290,22 @@ class API extends \Piwik\Plugin\API
      */
     public function getSiteFromId($idSite)
     {
+        $isAWD = $idSite == 0;
+
+        if ($isAWD) {
+            $idSite = 100;
+        }
+
         Piwik::checkUserHasViewAccess($idSite);
 
         $site = $this->getModel()->getSiteFromId($idSite);
 
         if ($site) {
             $this->enrichSite($site);
+        }
+
+        if ($isAWD) {
+            $idSite = 0;
         }
 
         Site::setSiteFromArray($idSite, $site);

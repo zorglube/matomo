@@ -501,7 +501,9 @@ class Archive implements ArchiveQuery
      */
     public static function createDataTableFromArchive($recordName, $idSite, $period, $date, $segment, $expanded = false, $flat = false, $idSubtable = null, $depth = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        if ($idSite != 0) {
+            Piwik::checkUserHasViewAccess($idSite);
+        }
 
         if ($idSubtable === false || $idSubtable === '') {
             $idSubtable = null;

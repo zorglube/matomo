@@ -304,6 +304,8 @@ class Access
                 Piwik::postEvent('Access.modifyUserAccess', [&$this->idsitesByAccess, $this->login]);
             }
         }
+
+        $this->idsitesByAccess['superuser'][] = 0;
     }
 
     /**

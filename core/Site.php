@@ -151,7 +151,7 @@ class Site
      */
     public static function setSiteFromArray($idSite, $infoSite)
     {
-        if (empty($idSite) || empty($infoSite)) {
+        if (0 !== $idSite && (empty($idSite) || empty($infoSite))) {
             throw new UnexpectedWebsiteFoundException("An unexpected website was found in the request: website id was set to '$idSite' .");
         }
 
@@ -422,6 +422,10 @@ class Site
      */
     public static function getIdSitesFromIdSitesString($ids, $_restrictSitesToLogin = false)
     {
+        if (is_numeric($ids) && $ids == 0) {
+            return [0];
+        }
+
         if (empty($ids)) {
             return [];
         }
