@@ -29,11 +29,6 @@ class LoginFromDifferentCountryDetection
      */
     private $usersModel;
 
-    /**
-     * @var array|null
-     */
-    private $location = null;
-
     public function __construct(Model $model, UsersModel $usersModel)
     {
         $this->model = $model;
@@ -50,10 +45,11 @@ class LoginFromDifferentCountryDetection
     {
         $provider = LocationProvider::getCurrentProvider();
 
-        return $provider->canBeUsedForLocationBasedSecurityChecks()
+        return null !== $provider
+            && $provider->canBeUsedForLocationBasedSecurityChecks()
             && $provider->isAvailable()
             && $provider->isWorking()
-            && true === $provider->getSupportedLocationInfo()[LocationProvider::COUNTRY_CODE_KEY];
+            && ($provider->getSupportedLocationInfo()[LocationProvider::COUNTRY_CODE_KEY] ?? false);
     }
 
     private function getLocation(): array

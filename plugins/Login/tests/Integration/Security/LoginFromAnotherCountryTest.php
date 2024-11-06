@@ -10,6 +10,7 @@
 namespace Integration\Security;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Piwik\Container\StaticContainer;
 use Piwik\DI;
 use Piwik\Piwik;
 use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
@@ -135,6 +136,21 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
     public function testEmailIsNotSentWhenUsingDefaultGeoIpProvider()
     {
         LocationProvider::setCurrentProvider(LocationProvider\DefaultProvider::ID);
+
+        // start in France
+        $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
+        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        $this->assertEmpty($this->loginCountry);
+
+        // continue in USA
+        $_SERVER['REMOTE_ADDR'] = self::IP_USA;
+        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        $this->assertEmpty($this->loginCountry);
+    }
+
+    public function testEmailIsNotSentWhenUsingGeoIpProviderIsActivateButNotAvailable()
+    {
+        StaticContainer::getContainer()->set('path.geoip2', '/tmp/invalid/geoip2/path');
 
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
