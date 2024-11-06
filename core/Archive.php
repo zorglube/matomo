@@ -428,6 +428,13 @@ class Archive implements ArchiveQuery
         return $data->getDataTable($this->getResultIndices());
     }
 
+    public function getDataTableAndMergeChildren($name, $idSubtable = null)
+    {
+        $data = $this->get($name, 'blob', $idSubtable);
+        $resultIndexes = $this->getResultIndices();
+        return $data->getMergedDataTable($resultIndexes);
+    }
+
     /**
      * Queries and returns one report with all of its subtables loaded.
      *

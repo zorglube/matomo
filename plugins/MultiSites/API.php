@@ -291,7 +291,7 @@ class API extends \Piwik\Plugin\API
             }
         }
 
-        $dataTable = $archive->getDataTable('MultiSites_AllWebsitesDashboard')->mergeChildren();
+        $dataTable = $archive->getDataTableAndMergeChildren('MultiSites_AllWebsitesDashboard');
         $foundSites = [];
 
         foreach ($dataTable as $row) {
@@ -332,7 +332,7 @@ class API extends \Piwik\Plugin\API
             }
 
             $pastArchive = Archive::build($idSites, $period, $strLastDate, $segment, $_restrictSitesToLogin);
-            $pastData = $pastArchive->getDataTable('MultiSites_AllWebsitesDashboard')->mergeChildren();
+            $pastData = $pastArchive->getDataTableAndMergeChildren('MultiSites_AllWebsitesDashboard');
 
             $this->populateLabel($pastData); // labels are needed to calculate evolution
             $this->calculateEvolutionPercentages($dataTable, $pastData, $apiMetrics);

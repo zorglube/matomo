@@ -9,6 +9,7 @@
 
 namespace Piwik\Archive;
 
+use Piwik\Common;
 use Piwik\DataTable;
 use Piwik\DataTable\Row;
 use Piwik\Segment;
@@ -207,10 +208,6 @@ class DataTableFactory
      */
     public function makeMerged($index, $resultIndices)
     {
-        if (!$this->isNumericDataType()) {
-            throw new \Exception('This method is supposed to work with non-numeric data types but it is not tested. To use it, remove this exception and write tests to be sure it works.');
-        }
-
         $hasSiteIndex   = isset($resultIndices[self::TABLE_METADATA_SITE_INDEX]);
         $hasPeriodIndex = isset($resultIndices[self::TABLE_METADATA_PERIOD_INDEX]);
 
@@ -581,7 +578,15 @@ class DataTableFactory
             }
             $meta['idsite'] = $idsite;
 
-            if (!empty($row)) {
+            if (!empty($row) && !$isNumeric) {
+                $recordName = reset($this->dataNames);
+
+                if ($this->idSubtable !== null) {
+                    $recordName .= '_' . $this->idSubtable;
+                }
+
+                $table->addRowsFromSerializedArray($row[$recordName]);
+            } elseif (!empty($row)) {
                 $table->addRow(new Row(array(
                     Row::COLUMNS  => $row,
                     Row::METADATA => $meta)));

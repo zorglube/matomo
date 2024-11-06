@@ -249,10 +249,19 @@ class EvolutionMetric extends ProcessedMetric
         if ($currentData != null && $pastData != null) {
             $p = $pastData->getMetadata(DataTableFactory::TABLE_METADATA_PERIOD_INDEX);
 
+            if (null === $p) {
+                return 1;
+            }
+
             $pStart = $p->getDateStart()->setTime('00:00:00');
             $pEnd = $p->getDateEnd()->setTime('23:59:59');
 
             $c = $currentData->getMetadata(DataTableFactory::TABLE_METADATA_PERIOD_INDEX);
+
+            if (null === $c) {
+                return 1;
+            }
+
             $cStart = $c->getDateStart()->setTime('00:00:00');
             $cEnd = $c->getDateEnd()->setTime('23:59:59');
 
