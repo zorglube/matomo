@@ -142,7 +142,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=75bcc548
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=08744f64
 
 var _hoisted_1 = {
   class: "dashboardHeader"
@@ -151,23 +151,16 @@ var _hoisted_2 = {
   class: "card-title"
 };
 var _hoisted_3 = {
-  key: 0,
-  id: "periodString",
-  class: "borderedControl"
-};
-var _hoisted_4 = {
   class: "dashboardControls"
 };
-var _hoisted_5 = {
+var _hoisted_4 = {
   class: "siteSearch"
 };
-var _hoisted_6 = ["placeholder"];
-var _hoisted_7 = ["title"];
-var _hoisted_8 = ["href"];
+var _hoisted_5 = ["placeholder"];
+var _hoisted_6 = ["title"];
+var _hoisted_7 = ["href"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_EnrichedHeadline = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("EnrichedHeadline");
-
-  var _component_PeriodSelector = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("PeriodSelector");
 
   var _component_KPICardContainer = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["resolveComponent"])("KPICardContainer");
 
@@ -180,12 +173,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('MultiSites_AllWebsitesDashboardTitle')), 1)];
     }),
     _: 1
-  }, 8, ["feature-name"])]), !_ctx.isWidgetized ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", _hoisted_3, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_PeriodSelector, {
-    periods: _ctx.selectablePeriods
-  }, null, 8, ["periods"])])) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_KPICardContainer, {
+  }, 8, ["feature-name"])])]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_KPICardContainer, {
     "is-loading": _ctx.isLoadingKPIs,
     "model-value": _ctx.kpis
-  }, null, 8, ["is-loading", "model-value"]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", _hoisted_4, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", _hoisted_5, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withDirectives"])(Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("input", {
+  }, null, 8, ["is-loading", "model-value"]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", _hoisted_3, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", _hoisted_4, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withDirectives"])(Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("input", {
     type: "text",
     onKeydown: _cache[0] || (_cache[0] = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["withKeys"])(function ($event) {
       return _ctx.searchSite(_ctx.searchTerm);
@@ -194,22 +185,22 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _ctx.searchTerm = $event;
     }),
     placeholder: _ctx.translate('Actions_SubmenuSitesearch')
-  }, null, 40, _hoisted_6), [[external_commonjs_vue_commonjs2_vue_root_Vue_["vModelText"], _ctx.searchTerm]]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
+  }, null, 40, _hoisted_5), [[external_commonjs_vue_commonjs2_vue_root_Vue_["vModelText"], _ctx.searchTerm]]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
     class: "icon-search",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return _ctx.searchSite(_ctx.searchTerm);
     }),
     title: _ctx.translate('General_ClickToSearch')
-  }, null, 8, _hoisted_7)]), !_ctx.isWidgetized && _ctx.isUserAllowedToAddSite ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("a", {
+  }, null, 8, _hoisted_6)]), !_ctx.isWidgetized && _ctx.isUserAllowedToAddSite ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("a", {
     key: 0,
     class: "btn",
     href: _ctx.addSiteUrl
-  }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('SitesManager_AddSite')), 9, _hoisted_8)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_SitesTable, {
+  }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate('SitesManager_AddSite')), 9, _hoisted_7)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createVNode"])(_component_SitesTable, {
     "display-revenue": _ctx.displayRevenue,
     "display-sparklines": _ctx.displaySparklines
   }, null, 8, ["display-revenue", "display-sparklines"])], 64);
 }
-// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=75bcc548
+// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=08744f64
 
 // EXTERNAL MODULE: external "CoreHome"
 var external_CoreHome_ = __webpack_require__("19dc");
@@ -564,7 +555,7 @@ var KPICardvue_type_template_id_3c2758fa_hoisted_6 = /*#__PURE__*/Object(externa
 }, " ", -1);
 
 var KPICardvue_type_template_id_3c2758fa_hoisted_7 = [KPICardvue_type_template_id_3c2758fa_hoisted_6];
-var KPICardvue_type_template_id_3c2758fa_hoisted_8 = ["innerHTML"];
+var _hoisted_8 = ["innerHTML"];
 function KPICardvue_type_template_id_3c2758fa_render(_ctx, _cache, $props, $setup, $data, $options) {
   return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_1, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_2, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
     class: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["normalizeClass"])("kpiCardIcon ".concat(_ctx.kpi.icon))
@@ -578,7 +569,7 @@ function KPICardvue_type_template_id_3c2758fa_render(_ctx, _cache, $props, $setu
     key: 0,
     innerHTML: _ctx.$sanitize(_ctx.kpi.badge),
     class: "kpiCardBadge"
-  }, null, 8, KPICardvue_type_template_id_3c2758fa_hoisted_8)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]);
+  }, null, 8, _hoisted_8)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]);
 }
 // CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICard.vue?vue&type=template&id=3c2758fa
 
@@ -1138,7 +1129,6 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_0d846a
   components: {
     EnrichedHeadline: external_CoreHome_["EnrichedHeadline"],
     KPICardContainer: KPICardContainer,
-    PeriodSelector: external_CoreHome_["PeriodSelector"],
     SitesTable: SitesTable
   },
   props: {
@@ -1164,10 +1154,6 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_0d846a
     },
     pageSize: {
       type: Number,
-      required: true
-    },
-    selectablePeriods: {
-      type: Array,
       required: true
     }
   },

@@ -14,13 +14,6 @@
         {{ translate('MultiSites_AllWebsitesDashboardTitle') }}
       </EnrichedHeadline>
     </h1>
-
-    <div v-if="!isWidgetized"
-         id="periodString"
-         class="borderedControl"
-    >
-      <PeriodSelector :periods="selectablePeriods" />
-    </div>
   </div>
 
   <KPICardContainer
@@ -64,7 +57,6 @@ import {
   EnrichedHeadline,
   Matomo,
   MatomoUrl,
-  PeriodSelector,
 } from 'CoreHome';
 
 import DashboardStore from './AllWebsitesDashboard.store';
@@ -80,7 +72,6 @@ export default defineComponent({
   components: {
     EnrichedHeadline,
     KPICardContainer,
-    PeriodSelector,
     SitesTable,
   },
   props: {
@@ -106,10 +97,6 @@ export default defineComponent({
     },
     pageSize: {
       type: Number,
-      required: true,
-    },
-    selectablePeriods: {
-      type: Array,
       required: true,
     },
   },
