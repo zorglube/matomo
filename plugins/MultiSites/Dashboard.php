@@ -35,7 +35,7 @@ class Dashboard
      * Array of metrics that will be displayed and will be number formatted
      * @var array
      */
-    private $displayedMetricColumns = ['nb_visits', 'nb_pageviews', 'nb_actions', 'revenue'];
+    private $displayedMetricColumns = ['nb_visits', 'nb_pageviews', 'hits', 'nb_actions', 'revenue'];
 
     /**
      * @param string $period
@@ -113,6 +113,7 @@ class Dashboard
         $totals = [
             'nb_pageviews'       => $this->sitesByGroup->getMetadata('total_nb_pageviews'),
             'nb_visits'          => $this->sitesByGroup->getMetadata('total_nb_visits'),
+            'hits'               => $this->sitesByGroup->getMetadata('total_hits'),
             'nb_actions'         => $this->sitesByGroup->getMetadata('total_nb_actions'),
             'revenue'            => $this->sitesByGroup->getMetadata('total_revenue'),
             'nb_visits_lastdate' => $this->sitesByGroup->getMetadata('total_nb_visits_lastdate') ? : 0,
@@ -303,10 +304,14 @@ class Dashboard
         unset($request['filter_limit']);
 
         // filter_sort_column does not work correctly is a bug in MultiSites.getAll
-        if (!empty($request['filter_sort_column']) && $request['filter_sort_column'] === 'nb_pageviews') {
-            $request['filter_sort_column'] = 'Actions_nb_pageviews';
-        } elseif (!empty($request['filter_sort_column']) && $request['filter_sort_column'] === 'revenue') {
-            $request['filter_sort_column'] = 'Goal_revenue';
+        $filterSortColumnMapping = [
+            'nb_pageviews' => 'Actions_nb_pageviews',
+            'hits' => 'Actions_hits',
+            'revenue' => 'Goal_revenue',
+        ];
+
+        if (!empty($request['filter_sort_column']) && array_key_exists($request['filter_sort_column'], $filterSortColumnMapping)) {
+            $request['filter_sort_column'] = $filterSortColumnMapping[$request['filter_sort_column']];
         }
 
         // make sure no limit filter is applied, we will do this manually

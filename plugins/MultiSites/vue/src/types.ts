@@ -13,7 +13,7 @@ export type EvolutionTrend = -1 | 0 | 1;
 export interface DashboardMetrics {
   hits_evolution: string;
   hits_evolution_trend: EvolutionTrend;
-  nb_hits: string;
+  hits: string;
   nb_pageviews: string;
   nb_visits: string;
   pageviews_evolution: string;

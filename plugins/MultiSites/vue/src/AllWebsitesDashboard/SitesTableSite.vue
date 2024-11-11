@@ -35,7 +35,7 @@
 
     <td><span class="value">{{ site.nb_visits }}</span></td>
     <td><span class="value">{{ site.nb_pageviews }}</span></td>
-    <td><span class="value">{{ site.nb_hits }}</span></td>
+    <td><span class="value">{{ site.hits }}</span></td>
     <td v-if="displayRevenue"><span class="value">{{ site.revenue }}</span></td>
 
     <td :colspan="displaySparkline ? 1 : 2">

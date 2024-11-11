@@ -9,9 +9,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 	<result date="2009-01-05">
@@ -23,9 +26,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 	<result date="2009-01-06">
@@ -37,9 +43,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 	<result date="2009-01-07">
@@ -51,9 +60,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 	<result date="2009-01-08">
@@ -65,9 +77,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 	<result date="2009-01-09">
@@ -79,9 +94,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 	<result date="2009-01-10">
@@ -93,9 +111,12 @@
 		<actions_evolution_trend>0</actions_evolution_trend>
 		<pageviews_evolution>0%</pageviews_evolution>
 		<pageviews_evolution_trend>0</pageviews_evolution_trend>
+		<hits_evolution>0%</hits_evolution>
+		<hits_evolution_trend>0</hits_evolution_trend>
 		<revenue_evolution>0%</revenue_evolution>
 		<revenue_evolution_trend>0</revenue_evolution_trend>
 		<nb_pageviews>0</nb_pageviews>
+		<hits>0</hits>
 		<revenue>0</revenue>
 	</result>
 </results>

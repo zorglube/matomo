@@ -213,7 +213,7 @@ class DashboardStore {
         'hits_evolution',
         'hits_evolution_trend',
         'label',
-        'nb_hits',
+        'hits',
         'nb_pageviews',
         'nb_visits',
         'pageviews_evolution',
@@ -282,7 +282,7 @@ class DashboardStore {
   private updateDashboardKPIs(response: GetDashboardMockDataResponse) {
     this.privateState.dashboardKPIs = {
       evolutionPeriod: Matomo.period as string,
-      hits: response.totals.nb_hits,
+      hits: response.totals.hits,
       hitsEvolution: response.totals.hits_evolution,
       hitsTrend: response.totals.hits_evolution_trend,
       pageviews: response.totals.nb_pageviews,

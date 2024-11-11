@@ -42,6 +42,8 @@ class API extends \Piwik\Plugin\API
 
     public const NB_VISITS_METRIC = 'nb_visits';
     public const NB_ACTIONS_METRIC = 'nb_actions';
+    public const NB_HITS_LABEL = 'hits';
+    public const NB_HITS_METRIC = 'Actions_hits';
     public const NB_PAGEVIEWS_LABEL = 'nb_pageviews';
     public const NB_PAGEVIEWS_METRIC = 'Actions_nb_pageviews';
     public const GOAL_REVENUE_METRIC = 'revenue';
@@ -426,7 +428,7 @@ class API extends \Piwik\Plugin\API
             'totals' => [
                 'hits_evolution'            => $numberFormatter->formatPercent(2.8, 2, 2),
                 'hits_evolution_trend'      => 1,
-                'nb_hits'                   => $numberFormatter->formatNumber(582303),
+                'hits'                      => $numberFormatter->formatNumber(582303),
                 'nb_pageviews'              => $numberFormatter->formatNumber(26027),
                 'nb_visits'                 => $numberFormatter->formatNumber(10118),
                 'pageviews_evolution'       => $numberFormatter->formatPercent(0.3, 2, 2),
@@ -448,12 +450,6 @@ class API extends \Piwik\Plugin\API
         }
 
         $sites = $dashboard->getSites($request, $filter_limit);
-
-        foreach ($sites as &$site) {
-            $site['nb_hits'] = $site['nb_pageviews'];
-            $site['hits_evolution'] = $site['pageviews_evolution'];
-            $site['hits_evolution_trend'] = $site['pageviews_evolution_trend'];
-        }
 
         $response['numSites'] = $dashboard->getNumSites();
         $response['sites'] = $sites;
@@ -530,6 +526,13 @@ class API extends \Piwik\Plugin\API
                 self::METRIC_EVOLUTION_COL_NAME_KEY => 'pageviews_evolution',
                 self::METRIC_RECORD_NAME_KEY        => self::NB_PAGEVIEWS_METRIC,
                 self::METRIC_COL_NAME_KEY           => self::NB_PAGEVIEWS_LABEL,
+                self::METRIC_IS_ECOMMERCE_KEY       => false,
+            );
+            $metrics[self::NB_HITS_LABEL] = array(
+                self::METRIC_TRANSLATION_KEY        => 'General_ColumnHits',
+                self::METRIC_EVOLUTION_COL_NAME_KEY => 'hits_evolution',
+                self::METRIC_RECORD_NAME_KEY        => self::NB_HITS_METRIC,
+                self::METRIC_COL_NAME_KEY           => self::NB_HITS_LABEL,
                 self::METRIC_IS_ECOMMERCE_KEY       => false,
             );
         }
