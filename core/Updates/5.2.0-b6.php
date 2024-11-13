@@ -31,7 +31,7 @@ class Updates_5_2_0_b6 extends Updates
 
     public function getMigrations(Updater $updater)
     {
-        $startOfCurrentYear = '01-01-' . Date::now()->toString('Y');
+        $startOfCurrentYear = Date::now()->toString('Y') . '-01-01';
 
         $commandToExecute = sprintf(
             './console core:invalidate-report-data --dates=%s,today --plugin=Actions.Actions_hits',
