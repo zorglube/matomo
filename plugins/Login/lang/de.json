@@ -42,8 +42,6 @@
         "LoginOrEmail": "Benutzername oder E-Mail",
         "LoginPasswordNotCorrect": "Benutzername und/oder Passwort ist nicht korrekt.",
         "LostYourPassword": "Passwort vergessen?",
-        "MailPasswordChangeBody2": "Hallo %1$s,\n\nEine Anfrage zum Zurücksetzen des Kennworts wurde von %2$s empfangen. Kopieren Sie den folgenden Link und fügen Sie ihn innerhalb von 24 Stunden in Ihren Webbrowser ein, um sich mit Ihrem neuen Benutzernamen und Passwort anzumelden:\n\n%3$s\n\nVielen Dank, dass Sie Matomo verwenden.",
-        "MailTopicPasswordChange": "Passwortänderung bestätigen",
         "NewPassword": "Neues Passwort",
         "NewPasswordRepeat": "Neues Passwort wiederholen",
         "NotAllowListTakesPrecendence": "Wenn eine IP sowohl in der Liste der zu blockierenden als auch in der Liste der nie zu blockierenden IPs aufgeführt ist, wird sie blockiert.",

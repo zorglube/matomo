@@ -94,7 +94,7 @@
         "SearchParametersNote": "Note : les paramètres de requête et de catégorie seront utilisés uniquement pour les sites web qui ont la recherche activée et ces paramètres laissés vides.",
         "SearchParametersNote2": "Pour désactiver la recherche sur les nouveaux sites web, laissez ces deux champs vides.",
         "SearchUseDefault": "Utiliser les paramètres de recherche par %1$sdéfaut%2$s",
-        "SelectACity": "Sélectionnez une ville",
+        "SelectACity": "Sélectionnez un pays",
         "SelectDefaultCurrency": "Vous pouvez sélectionner la devise par défaut pour les nouveaux sites web.",
         "SelectDefaultTimezone": "Vous pouvez sélectionner le fuseau horaire par défaut pour les nouveaux sites web.",
         "SetupMatomoTracker": "Vous pouvez configurer Matomo en quelques minutes en suivant notre guide étape par étape.",

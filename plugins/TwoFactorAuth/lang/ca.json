@@ -15,6 +15,7 @@
         "LostAuthenticationDevice": "Hola,%1$stinc autenticació de dos factors i he perdut el meu dispositiu d'autenticació. Podries restablir l'autenticació de dos factors per al meu nom d'usuari \"%5$s\"? Instruccions aquí: %6$s.%2$sL'URL de Matomo és %3$s.%4$sGràcies",
         "MissingAuthCodeAPI": "Si us plau especifiqueu el codi d'autenticació de dos factors.",
         "NotPossibleToLogIn": "No es pot iniciar la sessió a Matomo Analytics",
+        "PluginDescription": "Milloreu la seguretat del vostre compte de Matomo amb l'autenticació de dos factors (2FA) per protegir-vos de l'accés no autoritzat.",
         "RecoveryCodes": "Codis de recuperació",
         "RecoveryCodesAllUsed": "S'han utilitzat tots els codis de recuperació. Cal generar-ne de nous.",
         "RecoveryCodesExplanation": "Podeu utilitzar codis de recuperació per accedir al vostre compte quan no podeu rebre codis d'autenticació de dos factors (per exemple, quan no teniu el dispositiu mòbil a mà).",

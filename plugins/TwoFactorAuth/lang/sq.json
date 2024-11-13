@@ -15,6 +15,7 @@
         "LostAuthenticationDevice": "Njatjeta,%1$skam mirëfilltësim dyfaktorësh dhe humba pajisjen nga bëja mirëfilltësime. A mundeni, ju lutem, ta ktheni mirëfilltësimin dyfaktorësh te parazgjedhjet, për emrin tim të përdoruesit “%5$s”? Udhëzime për këtë mund të gjeni këtu: %6$s.%2$sURL-ja në Matomo është %3$s.%4$sFaleminderit",
         "MissingAuthCodeAPI": "Ju lutemi, jepni një kod mirëfilltësim dyfaktorësh.",
         "NotPossibleToLogIn": "S’bëhet dot hyrja te Matomo Analytics",
+        "PluginDescription": "Thelloni sigurinë e llogarisë tuaj Matomo, me Mirëfilltësim Dyfaktorësh (2FA), që të mbroheni kundër hyrjesh të paautorizuara.",
         "RecoveryCodes": "Kode rimarrjesh",
         "RecoveryCodesAllUsed": "Janë përdorur krejt kodet e rimarrjeve. Duhet të prodhoni kode të rinj rimarrjesh.",
         "RecoveryCodesExplanation": "Kodet e rimarrjes mund t’i përdorni për të hyrë te llogaria juaj, kur s’merrni dot kode mirëfilltësimi dyfaktorësh (për shembull, kur s’e keni pajisjen celulare me vete).",

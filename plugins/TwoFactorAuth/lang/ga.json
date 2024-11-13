@@ -15,6 +15,7 @@
         "LostAuthenticationDevice": "Haigh, tá fíordheimhniú dhá fhachtóir ag %1$s agus chaill mé mo ghléas fíordheimhnithe. An bhféadfá fíordheimhniú dhá-fhachtóir a athshocrú do m'ainm úsáideora \"%5$s\" le do thoil? Treoracha anseo: %6$s.%2$s Is é URL Matomo %3$s.%4$sGo raibh maith agat",
         "MissingAuthCodeAPI": "Sonraigh cód fíordheimhnithe dhá fhachtóir le do thoil.",
         "NotPossibleToLogIn": "Ní féidir logáil isteach ar Matomo Analytics",
+        "PluginDescription": "Feabhsaigh slándáil do chuntais Matomo le Fíordheimhniú Dhá-Fachtóir (2FA) chun cosaint a thabhairt ar rochtain neamhúdaraithe.",
         "RecoveryCodes": "Cóid aisghabhála",
         "RecoveryCodesAllUsed": "Baineadh úsáid as gach cód athshlánaithe. Ní mór duit cinn nua a ghiniúint.",
         "RecoveryCodesExplanation": "Is féidir leat cóid athshlánaithe a úsáid chun rochtain a fháil ar do chuntas nuair nach féidir leat cóid fíordheimhnithe dhá fhachtóir a fháil (mar shampla nuair nach bhfuil do ghléas soghluaiste leat).",
