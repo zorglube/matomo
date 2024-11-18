@@ -6,10 +6,6 @@ The Product Changelog at **[matomo.org/changelog](https://matomo.org/changelog)*
 
 ## Matomo 5.2.0
 
-### Breaking Changes
-
-* The dependency `jQuery.dotdotdot` has been removed. Please use pure CSS instead or include the library in your plugin if needed.
-
 ## Deprecations
 
 * The methods `Db::isOptimizeInnoDBSupported`, `Db::optimizeTables` have been deprecated. Use `Db\Schema::getInstance()->isOptimizeInnoDBSupported` and `Db\Schema::getInstance()->optimizeTables` instead
@@ -25,6 +21,7 @@ The Product Changelog at **[matomo.org/changelog](https://matomo.org/changelog)*
 ### Breaking Changes
 
 * The `errorlog` (`\Monolog\Handler\ErrorLogHandler`) and `syslog` (`\Monolog\Handler\SyslogHandler`) handlers are no longer directly used. Plugins using or overwriting those handlers using DI should now use the scoped classes `Piwik\Plugins\Monolog\Handler\ErrorLogHandler` and `Piwik\Plugins\Monolog\Handler\SyslogHandler` instead.
+* The dependency `jQuery.dotdotdot` has been removed. Please use pure CSS instead or include the library in your plugin if needed.
 
 ### Deprecations
 
