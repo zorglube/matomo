@@ -14,6 +14,7 @@ The Product Changelog at **[matomo.org/changelog](https://matomo.org/changelog)*
 
 * The methods `Db::isOptimizeInnoDBSupported`, `Db::optimizeTables` have been deprecated. Use `Db\Schema::getInstance()->isOptimizeInnoDBSupported` and `Db\Schema::getInstance()->optimizeTables` instead
 * The method `TransactionLevel::setUncommitted` has been deprecated. Use `TransactionLevel::setTransactionLevelForNonLockingReads` instead
+* The method `Piwik\Plugins\SitesManager\API::setGlobalExcludedQueryParameters` has been deprecated. Use `Piwik\Plugins\SitesManager\API::setGlobalQueryParamExclusion` instead
 
 ### New commands
 
