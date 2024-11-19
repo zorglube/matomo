@@ -176,7 +176,7 @@
         "ReportToLoadByDefault": "Varsayılan olarak yüklenecek rapor",
         "ResendInvite": "Çağrıyı yeniden gönder",
         "ResetTwoFactorAuthentication": "İki aşamalı kimlik doğrulamasını sıfırla",
-        "ResetTwoFactorAuthenticationInfo": "Kullanıcı kurtarma kodlarını ya da kimlik doğrulama aygıtını kaybettiği için oturum açamıyorsa, kullanıcının iki aşamalı kimlik doğrulamasını sıfırlanarak yeniden oturum açması sağlanabilir.",
+        "ResetTwoFactorAuthenticationInfo": "Kullanıcı kurtarma kodlarını ya da kimlik doğrulama aygıtını kaybettiği için oturum açamıyorsa, kullanıcının iki adımlı doğrulamasını sıfırlayarak yeniden oturum açmasını sağlanabilirsiniz.",
         "Role": "Rol",
         "RoleFor": "Şunun rolü",
         "RolesHelp": "Matomo üzerinde bir kullanıcının belirli bir site üzerinde yapabileceği işlemler roller tarafından belirlenir. Roller hakkında ayrıntılı bilgi almak için %1$sGörüntüleme%2$s ve %3$sYönetici%4$s bölümlerine bakabilirsiniz.",

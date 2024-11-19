@@ -62,6 +62,7 @@
         "ColumnExitsDocumentation": "Bu sayfada biten ziyaret sayısı.",
         "ColumnGenerationTime": "Üretilme süresi",
         "ColumnHits": "Tıklanma",
+        "ColumnHitsDocumentation": "Sitenizde kaydedilen tüm etkileşimlerin, sayfa görüntülemeleri, bağlantı tıklamaları, indirmeler ve etkinlikler ile birlikte toplam sayısı.",
         "ColumnKeyword": "Anahtar sözcük",
         "ColumnLabel": "Etiket",
         "ColumnMaxActions": "Bir ziyarette yapılan en çok işlem",
