@@ -5536,7 +5536,7 @@ if (typeof window.Matomo !== 'object') {
              *       pair = pair.split('=');
              *       result[pair[0]] = decodeURIComponent(pair[1] || '');
              *     });
-             *     return JSON.stringify(result);
+             *     return new URLSearchParams(result).toString();
              *   });
              *
              * @param {Function} customRequestContentProcessingLogic
