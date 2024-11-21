@@ -6,6 +6,15 @@ The Product Changelog at **[matomo.org/changelog](https://matomo.org/changelog)*
 
 ## Matomo 5.2.0
 
+### Breaking Changes
+
+* The MultiSites API has been reworked. The previously incorrectly named metrics for the previous period now have correct names:
+    * `previous_Actions_nb_pageviews` => `previous_nb_pageviews`
+    * `previous_Goal_revenue` => `previous_revenue`
+    * `previous_Goal_nb_conversions` => `previous_nb_conversions`
+    * `previous_Goal_0_nb_conversions` => `previous_orders`
+    * `previous_Goal_0_revenue` => `previous_ecommerce_revenue`
+
 ## Deprecations
 
 * The methods `Db::isOptimizeInnoDBSupported`, `Db::optimizeTables` have been deprecated. Use `Db\Schema::getInstance()->isOptimizeInnoDBSupported` and `Db\Schema::getInstance()->optimizeTables` instead

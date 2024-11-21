@@ -131,7 +131,7 @@
             :evolution-metric="evolutionMetric"
             :key="`site-${site.idsite}`"
             :model-value="site"
-            :sparkline-date="sparklineDate"
+            :display-sparkline="displaySparklines"
             :sparkline-metric="sparklineMetric"
         />
       </tbody>
@@ -256,9 +256,6 @@ export default defineComponent({
         default:
           return '';
       }
-    },
-    sparklineDate(): string|null {
-      return this.displaySparklines ? DashboardStore.state.value.sparklineDate : null;
     },
   },
   methods: {
