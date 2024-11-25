@@ -35,4 +35,5 @@ export interface KPICardData {
   icon: string;
   title: string;
   value: string;
+  valueCompact: string;
 }

@@ -166,7 +166,7 @@ declare global {
     hasSuperUserAccess: boolean;
     language: string;
     cacheBuster: string;
-    numbers: Record<string, string>;
+    numbers: Record<string, any>;
     visitorProfileEnabled: boolean;
     languageName: string;
     isPagesComparisonApiDisabled: boolean; // can be set to avoid checks on Api.getPagesComparisonsDisabledFor

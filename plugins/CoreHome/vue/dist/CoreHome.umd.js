@@ -2336,6 +2336,66 @@ var NumberFormatter_NumberFormatter = /*#__PURE__*/function () {
       return val;
     }
   }, {
+    key: "getMaxFractionDigitsForCompactFormat",
+    value: function getMaxFractionDigitsForCompactFormat(valueLength) {
+      return valueLength === 1 ? 1 : 0;
+    }
+  }, {
+    key: "determineCorrectCompactPattern",
+    value: function determineCorrectCompactPattern(patterns, value) {
+      var factor = 0;
+      var finalFactor = 0;
+      var patternId = '';
+
+      if (Math.round(value) < 1000) {
+        return ['0', 1];
+      }
+
+      for (factor = 1000; factor <= 10000000000000000000; factor *= 10) {
+        var patternOne = "".concat(factor, "One");
+        var patternOther = "".concat(factor, "Other");
+
+        if (Math.round(value / factor) === 1 && (patterns === null || patterns === void 0 ? void 0 : patterns[patternOne]) !== '') {
+          finalFactor = factor;
+          patternId = patternOne;
+        } else if (Math.round(value / factor) >= 1 && (patterns === null || patterns === void 0 ? void 0 : patterns[patternOther]) !== '') {
+          finalFactor = factor;
+          patternId = patternOther;
+        }
+
+        if (patterns !== null && patterns !== void 0 && patterns[patternId]) {
+          var _patterns$patternId$m;
+
+          var charCount = (patterns === null || patterns === void 0 ? void 0 : (_patterns$patternId$m = patterns[patternId].match(/0/g)) === null || _patterns$patternId$m === void 0 ? void 0 : _patterns$patternId$m.length) || 1;
+
+          if (Math.round(value * Math.pow(10, charCount) / (factor * 10)) < Math.pow(10, charCount)) {
+            break;
+          }
+        }
+      }
+
+      return [(patterns === null || patterns === void 0 ? void 0 : patterns[patternId]) || '0', finalFactor];
+    }
+  }, {
+    key: "formatCompact",
+    value: function formatCompact(pattern, factor, value) {
+      var _pattern$match;
+
+      var charCount = ((_pattern$match = pattern.match(/0/g)) === null || _pattern$match === void 0 ? void 0 : _pattern$match.length) || 0;
+      var finalFactor = factor;
+
+      if (charCount > 1) {
+        finalFactor /= Math.pow(10, charCount - 1);
+      }
+
+      var maximumFractionDigits = this.getMaxFractionDigitsForCompactFormat(charCount); // cut off numbers after a certain decimal, as formatNumber would round otherwise
+
+      var digitCountFactor = Math.pow(10, maximumFractionDigits);
+      var finalValue = Math.round(value / finalFactor * digitCountFactor) / digitCountFactor;
+      var formattedNumber = this.formatNumber(finalValue, maximumFractionDigits, 0);
+      return pattern.replace(/(0+)/, formattedNumber).replace(/('\.')/, '.');
+    }
+  }, {
     key: "parseFormattedNumber",
     value: function parseFormattedNumber(value) {
       var isNegative = value.indexOf(Matomo_Matomo.numbers.symbolMinus) > -1 || value.startsWith('-');
@@ -2360,6 +2420,40 @@ var NumberFormatter_NumberFormatter = /*#__PURE__*/function () {
     value: function formatCurrency(value, currency, maxFractionDigits, minFractionDigits) {
       var formatted = this.format(value, Matomo_Matomo.numbers.patternCurrency, this.valOrDefault(maxFractionDigits, this.defaultMaxFractionDigits), this.valOrDefault(minFractionDigits, this.defaultMinFractionDigits));
       return formatted.replace('¤', currency);
+    }
+  }, {
+    key: "formatNumberCompact",
+    value: function formatNumberCompact(value) {
+      var val = value;
+
+      var _this$determineCorrec = this.determineCorrectCompactPattern(Matomo_Matomo.numbers.patternsCompactNumber || [], val),
+          _this$determineCorrec2 = NumberFormatter_slicedToArray(_this$determineCorrec, 2),
+          compactPattern = _this$determineCorrec2[0],
+          factor = _this$determineCorrec2[1]; // In case no special formatting should be used, we use the default number format
+
+
+      if (Math.round(val) < 1000 || compactPattern === '0') {
+        return this.formatNumber(val, this.getMaxFractionDigitsForCompactFormat(Math.round(val)), 0);
+      }
+
+      return this.formatCompact(compactPattern, factor, val);
+    }
+  }, {
+    key: "formatCurrencyCompact",
+    value: function formatCurrencyCompact(value, currency) {
+      var val = value;
+
+      var _this$determineCorrec3 = this.determineCorrectCompactPattern(Matomo_Matomo.numbers.patternsCompactCurrency || [], val),
+          _this$determineCorrec4 = NumberFormatter_slicedToArray(_this$determineCorrec3, 2),
+          compactPattern = _this$determineCorrec4[0],
+          factor = _this$determineCorrec4[1]; // In case no special formatting should be used, we use the default number format
+
+
+      if (Math.round(val) < 1000 || compactPattern === '0') {
+        return this.formatCurrency(val, currency, this.getMaxFractionDigitsForCompactFormat(Math.round(val)), 0);
+      }
+
+      return this.formatCompact(compactPattern, factor, val).replace('¤', currency);
     }
   }, {
     key: "formatEvolution",

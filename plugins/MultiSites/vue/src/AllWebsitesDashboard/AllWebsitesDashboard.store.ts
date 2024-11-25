@@ -23,15 +23,19 @@ import {
 interface DashboardKPIData {
   evolutionPeriod: string;
   hits: string;
+  hitsCompact: string;
   hitsEvolution: string;
   hitsTrend: EvolutionTrend;
   pageviews: string;
+  pageviewsCompact: string;
   pageviewsEvolution: string;
   pageviewsTrend: EvolutionTrend;
   revenue: string;
+  revenueCompact: string;
   revenueEvolution: string;
   revenueTrend: EvolutionTrend;
   visits: string;
+  visitsCompact: string;
   visitsEvolution: string;
   visitsTrend: EvolutionTrend;
 }
@@ -64,15 +68,19 @@ class DashboardStore {
     dashboardKPIs: {
       evolutionPeriod: 'day',
       hits: '?',
+      hitsCompact: '?',
       hitsEvolution: '',
       hitsTrend: 0,
       pageviews: '?',
+      pageviewsCompact: '?',
       pageviewsEvolution: '',
       pageviewsTrend: 0,
       revenue: '?',
+      revenueCompact: '?',
       revenueEvolution: '',
       revenueTrend: 0,
       visits: '?',
+      visitsCompact: '?',
       visitsEvolution: '',
       visitsTrend: 0,
     },
@@ -286,6 +294,7 @@ class DashboardStore {
     this.privateState.dashboardKPIs = {
       evolutionPeriod: Matomo.period as string,
       hits: NumberFormatter.formatNumber(response.totals.hits),
+      hitsCompact: NumberFormatter.formatNumberCompact(response.totals.hits),
       hitsEvolution: NumberFormatter.calculateAndFormatEvolution(
         response.totals.hits,
         response.totals.previous_hits,
@@ -295,6 +304,7 @@ class DashboardStore {
         response.totals.hits - response.totals.previous_hits,
       ) as EvolutionTrend,
       pageviews: NumberFormatter.formatNumber(response.totals.nb_pageviews),
+      pageviewsCompact: NumberFormatter.formatNumberCompact(response.totals.nb_pageviews),
       pageviewsEvolution: NumberFormatter.calculateAndFormatEvolution(
         response.totals.nb_pageviews,
         response.totals.previous_nb_pageviews,
@@ -304,6 +314,7 @@ class DashboardStore {
         response.totals.nb_pageviews - response.totals.previous_nb_pageviews,
       ) as EvolutionTrend,
       revenue: NumberFormatter.formatCurrency(response.totals.revenue, ''),
+      revenueCompact: NumberFormatter.formatCurrencyCompact(response.totals.revenue, ''),
       revenueEvolution: NumberFormatter.calculateAndFormatEvolution(
         response.totals.revenue,
         response.totals.previous_revenue,
@@ -313,6 +324,7 @@ class DashboardStore {
         response.totals.revenue - response.totals.previous_revenue,
       ) as EvolutionTrend,
       visits: NumberFormatter.formatNumber(response.totals.nb_visits),
+      visitsCompact: NumberFormatter.formatNumberCompact(response.totals.nb_visits),
       visitsEvolution: NumberFormatter.calculateAndFormatEvolution(
         response.totals.nb_visits,
         response.totals.previous_nb_visits,

@@ -145,6 +145,71 @@ class NumberFormatter {
     return val;
   }
 
+  private getMaxFractionDigitsForCompactFormat(valueLength: number) {
+    return valueLength === 1 ? 1 : 0;
+  }
+
+  private determineCorrectCompactPattern(
+    patterns: Record<string, string>,
+    value: number,
+  ): [string, number] {
+    let factor = 0;
+    let finalFactor = 0;
+    let patternId = '';
+
+    if (Math.round(value) < 1000) {
+      return ['0', 1];
+    }
+
+    for (factor = 1000; factor <= 10000000000000000000; factor *= 10) {
+      const patternOne = `${factor}One`;
+      const patternOther = `${factor}Other`;
+
+      if (
+        Math.round(value / factor) === 1
+        && patterns?.[patternOne] !== ''
+      ) {
+        finalFactor = factor;
+        patternId = patternOne;
+      } else if (
+        Math.round(value / factor) >= 1
+        && patterns?.[patternOther] !== ''
+      ) {
+        finalFactor = factor;
+        patternId = patternOther;
+      }
+
+      if (patterns?.[patternId]) {
+        const charCount = patterns?.[patternId].match(/0/g)?.length || 1;
+
+        if (Math.round((value * 10 ** charCount) / (factor * 10)) < 10 ** charCount) {
+          break;
+        }
+      }
+    }
+
+    return [patterns?.[patternId] as string || '0', finalFactor];
+  }
+
+  private formatCompact(pattern: string, factor: number, value: number) {
+    const charCount = pattern.match(/0/g)?.length || 0;
+    let finalFactor = factor;
+
+    if (charCount > 1) {
+      finalFactor /= 10 ** (charCount - 1);
+    }
+
+    const maximumFractionDigits = this.getMaxFractionDigitsForCompactFormat(charCount);
+
+    // cut off numbers after a certain decimal, as formatNumber would round otherwise
+    const digitCountFactor = 10 ** maximumFractionDigits;
+    const finalValue = Math.round((value / finalFactor) * digitCountFactor) / digitCountFactor;
+
+    const formattedNumber = this.formatNumber(finalValue, maximumFractionDigits, 0);
+
+    return pattern.replace(/(0+)/, formattedNumber).replace(/('\.')/, '.');
+  }
+
   public parseFormattedNumber(value: string): number {
     const isNegative = value.indexOf(Matomo.numbers.symbolMinus) > -1 || value.startsWith('-');
     const numberParts = value.split(Matomo.numbers.symbolDecimal);
@@ -195,6 +260,45 @@ class NumberFormatter {
       this.valOrDefault(minFractionDigits, this.defaultMinFractionDigits),
     );
     return formatted.replace('¤', currency);
+  }
+
+  public formatNumberCompact(value: string|number) {
+    const val = (value as number);
+    const [compactPattern, factor] = this.determineCorrectCompactPattern(
+      Matomo.numbers.patternsCompactNumber || [],
+      val,
+    );
+
+    // In case no special formatting should be used, we use the default number format
+    if (Math.round(val) < 1000 || compactPattern === '0') {
+      return this.formatNumber(
+        val,
+        this.getMaxFractionDigitsForCompactFormat(Math.round(val)),
+        0,
+      );
+    }
+
+    return this.formatCompact(compactPattern, factor, val);
+  }
+
+  public formatCurrencyCompact(value: string|number, currency: string) {
+    const val = (value as number);
+    const [compactPattern, factor] = this.determineCorrectCompactPattern(
+      Matomo.numbers.patternsCompactCurrency || [],
+      val,
+    );
+
+    // In case no special formatting should be used, we use the default number format
+    if (Math.round(val) < 1000 || compactPattern === '0') {
+      return this.formatCurrency(
+        val,
+        currency,
+        this.getMaxFractionDigitsForCompactFormat(Math.round(val)),
+        0,
+      );
+    }
+
+    return this.formatCompact(compactPattern, factor, val).replace('¤', currency);
   }
 
   public formatEvolution(

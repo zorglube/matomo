@@ -142,7 +142,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=08744f64
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=486fbd67
 
 var _hoisted_1 = {
   class: "dashboardHeader"
@@ -200,7 +200,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "display-sparklines": _ctx.displaySparklines
   }, null, 8, ["display-revenue", "display-sparklines"])], 64);
 }
-// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=08744f64
+// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=486fbd67
 
 // EXTERNAL MODULE: external "CoreHome"
 var external_CoreHome_ = __webpack_require__("19dc");
@@ -237,15 +237,19 @@ var AllWebsitesDashboard_store_DashboardStore = /*#__PURE__*/function () {
       dashboardKPIs: {
         evolutionPeriod: 'day',
         hits: '?',
+        hitsCompact: '?',
         hitsEvolution: '',
         hitsTrend: 0,
         pageviews: '?',
+        pageviewsCompact: '?',
         pageviewsEvolution: '',
         pageviewsTrend: 0,
         revenue: '?',
+        revenueCompact: '?',
         revenueEvolution: '',
         revenueTrend: 0,
         visits: '?',
+        visitsCompact: '?',
         visitsEvolution: '',
         visitsTrend: 0
       },
@@ -454,15 +458,19 @@ var AllWebsitesDashboard_store_DashboardStore = /*#__PURE__*/function () {
       this.privateState.dashboardKPIs = {
         evolutionPeriod: external_CoreHome_["Matomo"].period,
         hits: external_CoreHome_["NumberFormatter"].formatNumber(response.totals.hits),
+        hitsCompact: external_CoreHome_["NumberFormatter"].formatNumberCompact(response.totals.hits),
         hitsEvolution: external_CoreHome_["NumberFormatter"].calculateAndFormatEvolution(response.totals.hits, response.totals.previous_hits, true),
         hitsTrend: Math.sign(response.totals.hits - response.totals.previous_hits),
         pageviews: external_CoreHome_["NumberFormatter"].formatNumber(response.totals.nb_pageviews),
+        pageviewsCompact: external_CoreHome_["NumberFormatter"].formatNumberCompact(response.totals.nb_pageviews),
         pageviewsEvolution: external_CoreHome_["NumberFormatter"].calculateAndFormatEvolution(response.totals.nb_pageviews, response.totals.previous_nb_pageviews, true),
         pageviewsTrend: Math.sign(response.totals.nb_pageviews - response.totals.previous_nb_pageviews),
         revenue: external_CoreHome_["NumberFormatter"].formatCurrency(response.totals.revenue, ''),
+        revenueCompact: external_CoreHome_["NumberFormatter"].formatCurrencyCompact(response.totals.revenue, ''),
         revenueEvolution: external_CoreHome_["NumberFormatter"].calculateAndFormatEvolution(response.totals.revenue, response.totals.previous_revenue, true),
         revenueTrend: Math.sign(response.totals.revenue - response.totals.previous_revenue),
         visits: external_CoreHome_["NumberFormatter"].formatNumber(response.totals.nb_visits),
+        visitsCompact: external_CoreHome_["NumberFormatter"].formatNumberCompact(response.totals.nb_visits),
         visitsEvolution: external_CoreHome_["NumberFormatter"].calculateAndFormatEvolution(response.totals.nb_visits, response.totals.previous_nb_visits, true),
         visitsTrend: Math.sign(response.totals.nb_visits - response.totals.previous_nb_visits)
       };
@@ -530,47 +538,48 @@ function KPICardContainervue_type_template_id_87c62b90_render(_ctx, _cache, $pro
 }
 // CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICardContainer.vue?vue&type=template&id=87c62b90
 
-// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICard.vue?vue&type=template&id=3c2758fa
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICard.vue?vue&type=template&id=40b7b9fe
 
-var KPICardvue_type_template_id_3c2758fa_hoisted_1 = {
+var KPICardvue_type_template_id_40b7b9fe_hoisted_1 = {
   class: "kpiCard"
 };
-var KPICardvue_type_template_id_3c2758fa_hoisted_2 = {
+var KPICardvue_type_template_id_40b7b9fe_hoisted_2 = {
   class: "kpiCardTitle"
 };
-var KPICardvue_type_template_id_3c2758fa_hoisted_3 = {
-  class: "kpiCardValue"
-};
-var KPICardvue_type_template_id_3c2758fa_hoisted_4 = {
+var KPICardvue_type_template_id_40b7b9fe_hoisted_3 = ["title"];
+var KPICardvue_type_template_id_40b7b9fe_hoisted_4 = {
   class: "kpiCardEvolution"
 };
-var KPICardvue_type_template_id_3c2758fa_hoisted_5 = {
+var KPICardvue_type_template_id_40b7b9fe_hoisted_5 = {
   key: 1,
   class: "kpiCardEvolution"
 };
 
-var KPICardvue_type_template_id_3c2758fa_hoisted_6 = /*#__PURE__*/Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
+var KPICardvue_type_template_id_40b7b9fe_hoisted_6 = /*#__PURE__*/Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
   class: "kpiCardEvolutionTrend"
 }, " ", -1);
 
-var KPICardvue_type_template_id_3c2758fa_hoisted_7 = [KPICardvue_type_template_id_3c2758fa_hoisted_6];
+var KPICardvue_type_template_id_40b7b9fe_hoisted_7 = [KPICardvue_type_template_id_40b7b9fe_hoisted_6];
 var _hoisted_8 = ["innerHTML"];
-function KPICardvue_type_template_id_3c2758fa_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_1, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_2, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
+function KPICardvue_type_template_id_40b7b9fe_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", KPICardvue_type_template_id_40b7b9fe_hoisted_1, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", KPICardvue_type_template_id_40b7b9fe_hoisted_2, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
     class: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["normalizeClass"])("kpiCardIcon ".concat(_ctx.kpi.icon))
-  }, null, 2), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(" " + Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate(_ctx.kpi.title)), 1)]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_3, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.kpi.value), 1), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_4, [_ctx.kpi.evolutionValue !== '' ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], {
+  }, null, 2), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(" " + Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate(_ctx.kpi.title)), 1)]), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", {
+    class: "kpiCardValue",
+    title: _ctx.kpi.valueCompact !== _ctx.kpi.value ? _ctx.kpi.value : ''
+  }, Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.kpi.valueCompact), 9, KPICardvue_type_template_id_40b7b9fe_hoisted_3), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("div", KPICardvue_type_template_id_40b7b9fe_hoisted_4, [_ctx.kpi.evolutionValue !== '' ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])(external_commonjs_vue_commonjs2_vue_root_Vue_["Fragment"], {
     key: 0
   }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
     class: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["normalizeClass"])("kpiCardEvolutionTrend ".concat(_ctx.evolutionTrendClass))
   }, [Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementVNode"])("span", {
     class: Object(external_commonjs_vue_commonjs2_vue_root_Vue_["normalizeClass"])("kpiCardEvolutionIcon ".concat(_ctx.evolutionTrendIcon))
-  }, null, 2), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(" " + Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.kpi.evolutionValue), 1)], 2), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(" " + Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate(_ctx.evolutionTrendFrom)), 1)], 64)) : (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", KPICardvue_type_template_id_3c2758fa_hoisted_5, KPICardvue_type_template_id_3c2758fa_hoisted_7))]), _ctx.kpi.badge ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
+  }, null, 2), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(" " + Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.kpi.evolutionValue), 1)], 2), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createTextVNode"])(" " + Object(external_commonjs_vue_commonjs2_vue_root_Vue_["toDisplayString"])(_ctx.translate(_ctx.evolutionTrendFrom)), 1)], 64)) : (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", KPICardvue_type_template_id_40b7b9fe_hoisted_5, KPICardvue_type_template_id_40b7b9fe_hoisted_7))]), _ctx.kpi.badge ? (Object(external_commonjs_vue_commonjs2_vue_root_Vue_["openBlock"])(), Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createElementBlock"])("div", {
     key: 0,
     innerHTML: _ctx.$sanitize(_ctx.kpi.badge),
     class: "kpiCardBadge"
   }, null, 8, _hoisted_8)) : Object(external_commonjs_vue_commonjs2_vue_root_Vue_["createCommentVNode"])("", true)]);
 }
-// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICard.vue?vue&type=template&id=3c2758fa
+// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICard.vue?vue&type=template&id=40b7b9fe
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-typescript/node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/babel-loader/lib!./node_modules/@vue/cli-plugin-typescript/node_modules/ts-loader??ref--14-2!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICard.vue?vue&type=script&lang=ts
 
@@ -633,7 +642,7 @@ function KPICardvue_type_template_id_3c2758fa_render(_ctx, _cache, $props, $setu
 
 
 
-KPICardvue_type_script_lang_ts.render = KPICardvue_type_template_id_3c2758fa_render
+KPICardvue_type_script_lang_ts.render = KPICardvue_type_template_id_40b7b9fe_render
 
 /* harmony default export */ var KPICard = (KPICardvue_type_script_lang_ts);
 // CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-typescript/node_modules/cache-loader/dist/cjs.js??ref--14-0!./node_modules/babel-loader/lib!./node_modules/@vue/cli-plugin-typescript/node_modules/ts-loader??ref--14-2!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/KPICardContainer.vue?vue&type=script&lang=ts
@@ -1193,6 +1202,7 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
         icon: 'icon-user',
         title: 'MultiSites_TotalVisits',
         value: dashboardKPIs.visits,
+        valueCompact: dashboardKPIs.visitsCompact,
         evolutionPeriod: dashboardKPIs.evolutionPeriod,
         evolutionTrend: dashboardKPIs.visitsTrend,
         evolutionValue: dashboardKPIs.visitsEvolution
@@ -1200,6 +1210,7 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
         icon: 'icon-show',
         title: 'MultiSites_TotalPageviews',
         value: dashboardKPIs.pageviews,
+        valueCompact: dashboardKPIs.pageviewsCompact,
         evolutionPeriod: dashboardKPIs.evolutionPeriod,
         evolutionTrend: dashboardKPIs.pageviewsTrend,
         evolutionValue: dashboardKPIs.pageviewsEvolution
@@ -1208,6 +1219,7 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
         icon: 'icon-hits',
         title: 'MultiSites_TotalHits',
         value: dashboardKPIs.hits,
+        valueCompact: dashboardKPIs.hitsCompact,
         evolutionPeriod: dashboardKPIs.evolutionPeriod,
         evolutionTrend: dashboardKPIs.hitsTrend,
         evolutionValue: dashboardKPIs.hitsEvolution
@@ -1218,6 +1230,7 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
           icon: 'icon-dollar-sign',
           title: 'General_TotalRevenue',
           value: dashboardKPIs.revenue,
+          valueCompact: dashboardKPIs.revenueCompact,
           evolutionPeriod: dashboardKPIs.evolutionPeriod,
           evolutionTrend: dashboardKPIs.revenueTrend,
           evolutionValue: dashboardKPIs.revenueEvolution
