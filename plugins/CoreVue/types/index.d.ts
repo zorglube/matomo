@@ -273,10 +273,10 @@ declare module '@vue/runtime-core' {
     $sanitize: Window['vueSanitize'];
     externalLink: (url: string, ...values:string[]) => string;
     externalRawLink: (url: string, ...values:string[]) => string;
-    formatNumber: (val: string, maxFractionDigits?: number, minFractionDigits?: number) => string;
-    formatPercent: (val: string, maxFractionDigits?: number, minFractionDigits?: number) => string;
-    formatCurrency: (val: string, cur: string, maxFractionDigits?: number, minFractionDigits?: number) => string;
-    formatEvolution: (val: string, cur: string, maxFractionDigits?: number, minFractionDigits?: number, noSign?: boolean) => string;
-    calculateAndFormatEvolution: (valCur: string, valPast: string, noSign?: boolean) => string;
+    formatNumber: (val: string|number, maxFractionDigits?: number, minFractionDigits?: number) => string;
+    formatPercent: (val: string|number, maxFractionDigits?: number, minFractionDigits?: number) => string;
+    formatCurrency: (val: string|number, cur: string, maxFractionDigits?: number, minFractionDigits?: number) => string;
+    formatEvolution: (val: string|number, maxFractionDigits?: number, minFractionDigits?: number, noSign?: boolean) => string;
+    calculateAndFormatEvolution: (valCur: string|number, valPrev: string|number, noSign?: boolean) => string;
   }
 }
