@@ -59,6 +59,8 @@ class Controller extends ControllerAdmin
         'finished'          => 'Installation_Congratulations',
     );
 
+    private const CONFIG_FIRST_ACCESS = 'installation_first_accessed';
+
     /**
      * Get installation steps
      *
@@ -657,7 +659,7 @@ class Controller extends ControllerAdmin
     {
         $config = Config::getInstance();
         unset($config->General['installation_in_progress']);
-        unset($config->General['installation_first_accessed']);
+        unset($config->General[self::CONFIG_FIRST_ACCESS]);
         $config->forceSave();
     }
 
@@ -741,7 +743,7 @@ class Controller extends ControllerAdmin
         $config = Config::getInstance();
 
         if ($config->existsLocalConfig()) {
-            $firstInstallationAccess = $config->General['installation_first_accessed'];
+            $firstInstallationAccess = $config->General[self::CONFIG_FIRST_ACCESS];
             $settingsProvider = StaticContainer::get(GlobalSettingsProvider::class);
 
             $config->deleteLocalConfig();
@@ -784,15 +786,12 @@ class Controller extends ControllerAdmin
     {
         $config = Config::getInstance();
 
-        if (
-            empty($config->General['installation_first_accessed'])
-            || !is_numeric($config->General['installation_first_accessed'])
-        ) {
-            $this->setUpInstallationExpiration($config, Date::getNowTimestamp());
+        if (!$this->hasInstallationExpirationInfo($config)) {
+            $this->setUpInstallationExpiration($config);
             return;
         }
 
-        $firstAccess = (int) $config->General['installation_first_accessed'];
+        $firstAccess = (int) $config->General[self::CONFIG_FIRST_ACCESS];
         $threeDaysAgo = Date::getNowTimestamp() - (3 * 24 * 60 * 60);
 
         if ($firstAccess < $threeDaysAgo) {
@@ -815,16 +814,23 @@ class Controller extends ControllerAdmin
         }
     }
 
-    private function setUpInstallationExpiration(Config $config, int $timestamp): void
+    private function hasInstallationExpirationInfo(Config $config): bool
     {
-        if (
-            !empty($config->General['installation_first_accessed'])
-            && is_numeric($config->General['installation_first_accessed'])
-        ) {
+        return !empty($config->General[self::CONFIG_FIRST_ACCESS])
+            && is_numeric($config->General[self::CONFIG_FIRST_ACCESS]);
+    }
+
+    private function setUpInstallationExpiration(Config $config, ?int $timestamp = null): void
+    {
+        if ($this->hasInstallationExpirationInfo($config)) {
             return;
         }
 
-        $config->General['installation_first_accessed'] = $timestamp;
+        if (null === $timestamp) {
+            $timestamp = Date::getNowTimestamp();
+        }
+
+        $config->General[self::CONFIG_FIRST_ACCESS] = $timestamp;
         $config->forceSave();
     }
 }
