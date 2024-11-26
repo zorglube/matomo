@@ -16,6 +16,7 @@ use Piwik\AssetManager;
 use Piwik\Common;
 use Piwik\Config;
 use Piwik\Container\StaticContainer;
+use Piwik\Cookie;
 use Piwik\DataAccess\ArchiveTableCreator;
 use Piwik\Date;
 use Piwik\Db;
@@ -35,6 +36,7 @@ use Piwik\Plugins\UsersManager\API as APIUsersManager;
 use Piwik\Plugins\UsersManager\NewsletterSignup;
 use Piwik\Plugins\UsersManager\UserUpdater;
 use Piwik\ProxyHeaders;
+use Piwik\ProxyHttp;
 use Piwik\SettingsPiwik;
 use Piwik\Tracker\TrackerCodeGenerator;
 use Piwik\Translation\Translator;
@@ -60,6 +62,11 @@ class Controller extends ControllerAdmin
     );
 
     private const CONFIG_FIRST_ACCESS = 'installation_first_accessed';
+    private const CONFIG_SESSION_ID   = 'installation_session_id';
+    private const CONFIG_SESSION_TIME = 'installation_session_time';
+
+    private const INSTALLATION_SESSION_COOKIE_KEY = 'id';
+    private const INSTALLATION_SESSION_COOKIE_NAME = 'mtm_install';
 
     /**
      * Get installation steps
@@ -113,6 +120,11 @@ class Controller extends ControllerAdmin
     public function systemCheck()
     {
         $this->checkPiwikIsNotInstalled();
+
+        // check for an active session lock before resetting the installation
+        // so different users can not break an ongoing process
+        // (config file deletion will always keep session/expiration information)
+        $this->checkInstallationIsLockedToSession();
         $this->deleteConfigFileIfNeeded();
         $this->checkInstallationIsNotExpired();
 
@@ -145,6 +157,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         $view = new View(
             '@Installation/databaseSetup',
@@ -184,6 +197,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         $view = new View(
             '@Installation/tablesCreation',
@@ -236,6 +250,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         $steps = $this->getInstallationSteps();
         $steps['tablesCreation'] = 'Installation_ReusingTables';
@@ -271,6 +286,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         $superUserAlreadyExists = Access::doAsSuperUser(function () {
             return count(APIUsersManager::getInstance()->getUsersHavingSuperUserAccess()) > 0;
@@ -326,6 +342,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         ServerFilesGenerator::createFilesForSecurity();
 
@@ -383,6 +400,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         $view = new View(
             '@Installation/trackingCode',
@@ -428,6 +446,7 @@ class Controller extends ControllerAdmin
     {
         $this->checkPiwikIsNotInstalled();
         $this->checkInstallationIsNotExpired();
+        $this->checkInstallationIsLockedToSession();
 
         $view = new View(
             '@Installation/finished',
@@ -660,6 +679,8 @@ class Controller extends ControllerAdmin
         $config = Config::getInstance();
         unset($config->General['installation_in_progress']);
         unset($config->General[self::CONFIG_FIRST_ACCESS]);
+        unset($config->General[self::CONFIG_SESSION_ID]);
+        unset($config->General[self::CONFIG_SESSION_TIME]);
         $config->forceSave();
     }
 
@@ -744,11 +765,14 @@ class Controller extends ControllerAdmin
 
         if ($config->existsLocalConfig()) {
             $firstInstallationAccess = $config->General[self::CONFIG_FIRST_ACCESS];
+            $installationSessionId = $config->General[self::CONFIG_SESSION_ID];
+            $installationSessionTime = $config->General[self::CONFIG_SESSION_TIME];
             $settingsProvider = StaticContainer::get(GlobalSettingsProvider::class);
 
             $config->deleteLocalConfig();
             $settingsProvider->reload();
             $this->setUpInstallationExpiration($config, $firstInstallationAccess);
+            $this->setUpInstallationSessionLock($config, $installationSessionId, $installationSessionTime);
 
             // deleting the config file removes the salt, which in turns invalidates existing cookies (including the
             // one for selected language), so we re-save that cookie now
@@ -780,6 +804,40 @@ class Controller extends ControllerAdmin
         $view = new \Piwik\View('@Installation/_systemCheckSection');
         $view->diagnosticReport = $diagnosticReport;
         return $view->render();
+    }
+
+    private function checkInstallationIsLockedToSession(): void
+    {
+        $config = Config::getInstance();
+
+        if (!$this->hasInstallationSessionLockInfo($config)) {
+            $this->setUpInstallationSessionLock($config);
+
+            return;
+        }
+
+        $sessionTime = (int) $config->General[self::CONFIG_SESSION_TIME];
+        $threeHoursAgo = Date::getNowTimestamp() - (3 * 60 * 60);
+
+        if ($sessionTime < $threeHoursAgo) {
+            // old lock has expired -> create new lock
+            $this->setUpInstallationSessionLock($config);
+            return;
+        }
+
+        $installationSessionId = $config->General[self::CONFIG_SESSION_ID];
+        $cookie = new Cookie(self::INSTALLATION_SESSION_COOKIE_NAME, '+ 3 hours');
+
+        if (
+            $cookie->isCookieFound()
+            && $cookie->get(self::INSTALLATION_SESSION_COOKIE_KEY) === $installationSessionId
+        ) {
+            // renew lock fur current session
+            $this->setUpInstallationSessionLock($config, $installationSessionId);
+            return;
+        }
+
+        Piwik::exitWithErrorMessage('installer locked to different session');
     }
 
     private function checkInstallationIsNotExpired(): void
@@ -820,6 +878,13 @@ class Controller extends ControllerAdmin
             && is_numeric($config->General[self::CONFIG_FIRST_ACCESS]);
     }
 
+    private function hasInstallationSessionLockInfo(Config $config): bool
+    {
+        return !empty($config->General[self::CONFIG_SESSION_ID])
+            && !empty($config->General[self::CONFIG_SESSION_TIME])
+            && is_numeric($config->General[self::CONFIG_SESSION_TIME]);
+    }
+
     private function setUpInstallationExpiration(Config $config, ?int $timestamp = null): void
     {
         if ($this->hasInstallationExpirationInfo($config)) {
@@ -832,5 +897,29 @@ class Controller extends ControllerAdmin
 
         $config->General[self::CONFIG_FIRST_ACCESS] = $timestamp;
         $config->forceSave();
+    }
+
+    private function setUpInstallationSessionLock(
+        Config $config,
+        ?string $sessionId = null,
+        ?int $timestamp = null
+    ): void {
+        if (empty($config->General[self::CONFIG_SESSION_ID]) && empty($sessionId)) {
+             $sessionId = bin2hex(random_bytes(32));
+        }
+
+        if (null === $timestamp) {
+            $timestamp = Date::getNowTimestamp();
+        }
+
+        $config->General[self::CONFIG_SESSION_ID] = $sessionId;
+        $config->General[self::CONFIG_SESSION_TIME] = $timestamp;
+        $config->forceSave();
+
+        $cookie = new Cookie(self::INSTALLATION_SESSION_COOKIE_NAME, '+ 3 hours');
+        $cookie->set(self::INSTALLATION_SESSION_COOKIE_KEY, $sessionId);
+        $cookie->setSecure(ProxyHttp::isHttps());
+        $cookie->setHttpOnly(true);
+        $cookie->save('Lax');
     }
 }
