@@ -55,7 +55,7 @@ class NumericAttributeGoalTrackingTest extends IntegrationTestCase
         $this->assertEquals(1, $this->getConversionCount($this->visitDurationIdGoal));
     }
 
-    public function test_trackingPageViewsGoal()
+    public function testTrackingPageViewsGoal()
     {
         $t = Fixture::getTracker($this->idSite, '2013-02-03 04:00:00');
         $this->assertEquals(0, $this->getConversionCount($this->visitPageViewsIdGoal));
