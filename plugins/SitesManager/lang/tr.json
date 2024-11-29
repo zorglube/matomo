@@ -49,7 +49,7 @@
         "ExcludedUserAgents": "Katılmayacak kullanıcı uygulamaları",
         "ExclusionTypeDescriptionCommonSessionParameters": "Bu seçenek, phpsessid, sessionid gibi genel oturum parametrelerinin otomatik olarak izlemeye ve raporlara katılmamasını sağlar.",
         "ExclusionTypeDescriptionCustom": "Bu seçenek, izlemeye ve raporlara katılmayacak kendi adres parametrelerinizi belirtmenizi sağlar. Ayrıca, metin alanının altındaki düğmeye tıklayarak, kendi özel adres parametrelerinizle birlikte Matomo tarafından önerilen PII parametrelerinin hazır listesinin de katılmamasını sağlayabilirsiniz.",
-        "ExclusionTypeDescriptionMatomoRecommendedPII": "Bu seçenek, Matomo tarafından KİB olarak belirlenen genel adres parametrelerinin otomatik olarak izlemeye ve raporlara katılmamasını sağlayacaktır. Bu seçenekle katılmayacak parametrelerin listesini görmek için lütfen aşağıya tıklayın.",
+        "ExclusionTypeDescriptionMatomoRecommendedPII": "Bu seçenek, Matomo tarafından KİB olarak belirlenen genel adres parametrelerinin otomatik olarak izlemeye ve raporlara katılmamasını sağlar. Bu seçenekle katılmayacak parametrelerin listesini görmek için lütfen aşağıya tıklayın.",
         "ExclusionTypeOptionCommonSessionParameters": "Genel oturum parametreleri",
         "ExclusionTypeOptionCustom": "Özel",
         "ExclusionTypeOptionMatomoRecommendedPII": "Matomo tarafından önerilen PII",

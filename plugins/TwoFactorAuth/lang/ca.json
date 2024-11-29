@@ -28,7 +28,6 @@
         "SetUpTwoFactorAuthentication": "Configura l'autenticació de dos factors (2FA)",
         "SetupAuthenticatorOnDevice": "Configura una aplicació OTP al teu dispositiu",
         "SetupAuthenticatorOnDeviceStep1": "Instal·leu una aplicació OTP, per exemple:",
-        "SetupAuthenticatorOnDeviceStep2": "A continuació, obriu l'aplicació i escanegeu el codi de barres següent amb l'aplicació OTP al vostre dispositiu mòbil. %1$sIntroduïu aquest codi%2$s si no podeu escanejar el codi de barres.",
         "SetupBackupRecoveryCodes": "Deseu els codis de recuperació de manera segura utilitzant un dels mètodes anteriors abans de continuar.",
         "SetupFinishedSubtitle": "Heu configurat l'autenticació de dos factors. A partir d'ara, heu d'introduir un codi d'autenticació per iniciar la sessió. Assegureu-vos que teniu el dispositiu mòbil o els codis de seguretat.",
         "SetupFinishedTitle": "El vostre compte és ara més segur.",

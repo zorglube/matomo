@@ -64,7 +64,6 @@
         "OverviewPluginSubscriptions": "Përmbledhje e pajtimeve tuaja në shtojca",
         "OverviewPluginSubscriptionsAllDetails": "Që të shihni krejt hollësitë, ose të ndryshoni një pajtim, hyni te llogaria juaj.",
         "OverviewPluginSubscriptionsMissingInfo": "Mundet që mungon një pajtim, për shembull, nëse s’është përfunduar ende një pagesë. Në një rast të tillë riprovoni pas pak orësh, ose lidhuni me ekipin e Matomo-s.",
-        "OverviewPluginSubscriptionsMissingLicense": "S’keni caktuar ndonjë kyç licence. Nëse keni blerë një pajtim shtojce, shkoni te %1$sMarketplace%2$s dhe jepni kyçin tuaj të licencës.",
         "PaidPlugins": "Veçori Me Pagesë",
         "PluginDescription": "Thelloni dhe zgjeroni funksionimin e Matomo-s, përmes Marketplace-it, duke shkarkuar prej andej shtojca dhe tema grafike.",
         "PluginKeywords": "Fjalëkyçe",

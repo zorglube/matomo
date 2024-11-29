@@ -571,7 +571,7 @@
         "EmailUs": "Bize e-posta gönderin",
         "EnableGraphsLabel": "Çizelgeleri görüntüle",
         "EnterAuthCode": "Kimlik doğrulama kodunu yazın",
-        "EnterAuthCodeExplanation": "İki aşamalı kimlik doğrulama kullanıyorsunuz gibi görünüyor. Lütfen oturum açmak için 6 haneli kodu yazın.",
+        "EnterAuthCodeExplanation": "İki adımlı doğrulama kullanıyorsunuz gibi görünüyor. Lütfen oturum açmak için 6 haneli kodu yazın.",
         "EnterCorrectAuthCode": "Doğru kimlik doğrulama kodunu yazın",
         "EvolutionGraph": "Geçmiş çizelgesi",
         "ExceptionNoViewAccess": "Lütfen kullanıcı adı ve parolanızı denetleyin ve en az bir site için %s izniniz olduğundan emin olun.",

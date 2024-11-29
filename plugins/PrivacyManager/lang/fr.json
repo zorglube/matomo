@@ -144,6 +144,7 @@
         "LastDelete": "La dernière suppression était le",
         "LeastDaysInput": "Veuillez spécifier un nombre de jours plus grand que %s.",
         "LeastMonthsInput": "Veuillez spécifier un nombre de mois supérieur à %s.",
+        "LinkVisitActionColumns": "Lier les colonnes des actions des visites",
         "MatchingDataSubjects": "Appariement des personnes concernées",
         "MenuPrivacySettings": "Vie privée",
         "NextDelete": "Prochaine suppression programmée dans",
