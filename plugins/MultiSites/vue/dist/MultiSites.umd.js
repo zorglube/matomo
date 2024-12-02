@@ -142,7 +142,7 @@ if (typeof window !== 'undefined') {
 // EXTERNAL MODULE: external {"commonjs":"vue","commonjs2":"vue","root":"Vue"}
 var external_commonjs_vue_commonjs2_vue_root_Vue_ = __webpack_require__("8bbf");
 
-// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=486fbd67
+// CONCATENATED MODULE: ./node_modules/@vue/cli-plugin-babel/node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/@vue/cli-plugin-babel/node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist/templateLoader.js??ref--6!./node_modules/@vue/cli-service/node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/@vue/cli-service/node_modules/vue-loader-v16/dist??ref--0-1!./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=3c33ac8e
 
 var _hoisted_1 = {
   class: "dashboardHeader"
@@ -200,7 +200,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "display-sparklines": _ctx.displaySparklines
   }, null, 8, ["display-revenue", "display-sparklines"])], 64);
 }
-// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=486fbd67
+// CONCATENATED MODULE: ./plugins/MultiSites/vue/src/AllWebsitesDashboard/AllWebsitesDashboard.vue?vue&type=template&id=3c33ac8e
 
 // EXTERNAL MODULE: external "CoreHome"
 var external_CoreHome_ = __webpack_require__("19dc");
@@ -235,6 +235,7 @@ var AllWebsitesDashboard_store_DashboardStore = /*#__PURE__*/function () {
 
     _defineProperty(this, "privateState", Object(external_commonjs_vue_commonjs2_vue_root_Vue_["reactive"])({
       dashboardKPIs: {
+        badges: {},
         evolutionPeriod: 'day',
         hits: '?',
         hitsCompact: '?',
@@ -410,6 +411,17 @@ var AllWebsitesDashboard_store_DashboardStore = /*#__PURE__*/function () {
       }).then(function (response) {
         if (!onlySites) {
           _this2.updateDashboardKPIs(response);
+
+          external_CoreHome_["Matomo"].postEvent('MultiSites.DashboardKPIs.updated', {
+            parameters: new external_CoreHome_["AjaxHelper"]().mixinDefaultGetParams({
+              filter_limit: _this2.pageSize,
+              filter_offset: _this2.currentPagingOffset.value,
+              filter_sort_column: _this2.privateState.sortColumn,
+              filter_sort_order: _this2.privateState.sortOrder,
+              pattern: _this2.searchTerm
+            }),
+            kpis: _this2.privateState.dashboardKPIs
+          });
         }
 
         _this2.updateDashboardSites(response);
@@ -456,6 +468,12 @@ var AllWebsitesDashboard_store_DashboardStore = /*#__PURE__*/function () {
     key: "updateDashboardKPIs",
     value: function updateDashboardKPIs(response) {
       this.privateState.dashboardKPIs = {
+        badges: {
+          hits: '',
+          pageviews: '',
+          revenue: '',
+          visits: ''
+        },
         evolutionPeriod: external_CoreHome_["Matomo"].period,
         hits: external_CoreHome_["NumberFormatter"].formatNumber(response.totals.hits),
         hitsCompact: external_CoreHome_["NumberFormatter"].formatNumberCompact(response.totals.hits),
@@ -1161,10 +1179,6 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
       type: Boolean,
       required: true
     },
-    kpiBadgeHits: {
-      type: String,
-      required: true
-    },
     pageSize: {
       type: Number,
       required: true
@@ -1197,8 +1211,11 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
       return AllWebsitesDashboard_store.state.value.isLoadingKPIs;
     },
     kpis: function kpis() {
+      var _dashboardKPIs$badges, _dashboardKPIs$badges2, _dashboardKPIs$badges3;
+
       var dashboardKPIs = AllWebsitesDashboard_store.state.value.dashboardKPIs;
       var kpis = [{
+        badge: ((_dashboardKPIs$badges = dashboardKPIs.badges) === null || _dashboardKPIs$badges === void 0 ? void 0 : _dashboardKPIs$badges.visits) || '',
         icon: 'icon-user',
         title: 'MultiSites_TotalVisits',
         value: dashboardKPIs.visits,
@@ -1207,6 +1224,7 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
         evolutionTrend: dashboardKPIs.visitsTrend,
         evolutionValue: dashboardKPIs.visitsEvolution
       }, {
+        badge: ((_dashboardKPIs$badges2 = dashboardKPIs.badges) === null || _dashboardKPIs$badges2 === void 0 ? void 0 : _dashboardKPIs$badges2.pageviews) || '',
         icon: 'icon-show',
         title: 'MultiSites_TotalPageviews',
         value: dashboardKPIs.pageviews,
@@ -1215,7 +1233,7 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
         evolutionTrend: dashboardKPIs.pageviewsTrend,
         evolutionValue: dashboardKPIs.pageviewsEvolution
       }, {
-        badge: this.kpiBadgeHits,
+        badge: ((_dashboardKPIs$badges3 = dashboardKPIs.badges) === null || _dashboardKPIs$badges3 === void 0 ? void 0 : _dashboardKPIs$badges3.hits) || '',
         icon: 'icon-hits',
         title: 'MultiSites_TotalHits',
         value: dashboardKPIs.hits,
@@ -1226,7 +1244,10 @@ SitesTablevue_type_script_lang_ts.render = SitesTablevue_type_template_id_198e6b
       }];
 
       if (this.displayRevenue) {
+        var _dashboardKPIs$badges4;
+
         kpis.push({
+          badge: ((_dashboardKPIs$badges4 = dashboardKPIs.badges) === null || _dashboardKPIs$badges4 === void 0 ? void 0 : _dashboardKPIs$badges4.revenue) || '',
           icon: 'icon-dollar-sign',
           title: 'General_TotalRevenue',
           value: dashboardKPIs.revenue,

@@ -21,6 +21,7 @@ import {
 } from '../types';
 
 interface DashboardKPIData {
+  badges: Record<string, string>;
   evolutionPeriod: string;
   hits: string;
   hitsCompact: string;
@@ -66,6 +67,7 @@ class DashboardStore {
 
   private privateState = reactive<DashboardStoreState>({
     dashboardKPIs: {
+      badges: {},
       evolutionPeriod: 'day',
       hits: '?',
       hitsCompact: '?',
@@ -247,6 +249,16 @@ class DashboardStore {
     ).then((response) => {
       if (!onlySites) {
         this.updateDashboardKPIs(response);
+        Matomo.postEvent('MultiSites.DashboardKPIs.updated', {
+          parameters: (new AjaxHelper()).mixinDefaultGetParams({
+            filter_limit: this.pageSize,
+            filter_offset: this.currentPagingOffset.value,
+            filter_sort_column: this.privateState.sortColumn,
+            filter_sort_order: this.privateState.sortOrder,
+            pattern: this.searchTerm,
+          }),
+          kpis: this.privateState.dashboardKPIs,
+        });
       }
 
       this.updateDashboardSites(response);
@@ -292,6 +304,12 @@ class DashboardStore {
 
   private updateDashboardKPIs(response: GetAllWithGroupsDataResponse) {
     this.privateState.dashboardKPIs = {
+      badges: {
+        hits: '',
+        pageviews: '',
+        revenue: '',
+        visits: '',
+      },
       evolutionPeriod: Matomo.period as string,
       hits: NumberFormatter.formatNumber(response.totals.hits),
       hitsCompact: NumberFormatter.formatNumberCompact(response.totals.hits),
