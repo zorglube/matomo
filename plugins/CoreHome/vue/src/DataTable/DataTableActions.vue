@@ -13,7 +13,7 @@
       :class="{highlighted: isAnyConfigureIconHighlighted}"
       href
       @click.prevent
-      :data-target="`dropdownConfigure${randomIdForElement}`"
+      :data-target="`dropdownConfigure${randomIdForDropdown}`"
       style="margin-right:3.5px"
       v-if="hasConfigItems && (isAnyConfigureIconHighlighted || isTableView)"
     >
@@ -24,7 +24,7 @@
       class="dropdown-button dataTableAction activateVisualizationSelection"
       v-dropdown-button
       href
-      :data-target="`dropdownVisualizations${randomIdForElement}`"
+      :data-target="`dropdownVisualizations${randomIdForDropdown}`"
       style="margin-right:3.5px"
       @click.prevent
     >
@@ -44,7 +44,7 @@
 
     <ul
       v-if="showFooterIcons"
-      :id="`dropdownVisualizations${randomIdForElement}`"
+      :id="`dropdownVisualizations${randomIdForDropdown}`"
       class="dropdown-content dataTableFooterIcons"
     >
       <Passthrough v-for="(footerIconGroup, index) in footerIcons" :key="index">
@@ -149,7 +149,7 @@
     </a>
 
     <ul
-      :id="`dropdownConfigure${randomIdForElement}`"
+      :id="`dropdownConfigure${randomIdForDropdown}`"
       class="dropdown-content tableConfiguration"
     >
       <li v-if="showFlattenTable">
@@ -199,7 +199,7 @@
       href=""
       @click.prevent
       :title="translate('CoreHome_ChangePeriod')"
-      :data-target="`dropdownPeriods${randomIdForElement}`"
+      :data-target="`dropdownPeriods${randomIdForDropdown}`"
     >
       <div>
         <span class="icon-calendar"></span>
@@ -210,7 +210,7 @@
     </a>
     <ul
       v-if="showPeriods"
-      :id="`dropdownPeriods${randomIdForElement}`"
+      :id="`dropdownPeriods${randomIdForDropdown}`"
       class="dropdown-content dataTablePeriods"
     >
       <li v-for="selectablePeriod in selectablePeriods" :key="selectablePeriod">
@@ -348,7 +348,7 @@ export default defineComponent({
     },
   },
   computed: {
-    randomIdForElement(): number {
+    randomIdForDropdown(): number {
       return Math.floor(Math.random() * 999999);
     },
     allFooterIcons(): FooterIcon[] {
