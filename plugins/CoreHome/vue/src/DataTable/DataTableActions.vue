@@ -13,7 +13,7 @@
       :class="{highlighted: isAnyConfigureIconHighlighted}"
       href
       @click.prevent
-      :data-target="`dropdownConfigure${randomIdForDropdown}`"
+      :data-target="`dropdownConfigure${randomIdForElement}`"
       style="margin-right:3.5px"
       v-if="hasConfigItems && (isAnyConfigureIconHighlighted || isTableView)"
     >
@@ -24,7 +24,7 @@
       class="dropdown-button dataTableAction activateVisualizationSelection"
       v-dropdown-button
       href
-      :data-target="`dropdownVisualizations${randomIdForDropdown}`"
+      :data-target="`dropdownVisualizations${randomIdForElement}`"
       style="margin-right:3.5px"
       @click.prevent
     >
@@ -44,7 +44,7 @@
 
     <ul
       v-if="showFooterIcons"
-      :id="`dropdownVisualizations${randomIdForDropdown}`"
+      :id="`dropdownVisualizations${randomIdForElement}`"
       class="dropdown-content dataTableFooterIcons"
     >
       <Passthrough v-for="(footerIconGroup, index) in footerIcons" :key="index">
@@ -128,7 +128,7 @@
       <span class="icon-search" draggable="false"></span>
       <span class="icon-close" draggable="false" :title="translate('CoreHome_CloseSearch')"></span>
       <input
-        :id="`widgetSearch_${reportId}`"
+        :id="`widgetSearch_${reportId}_${randomIdForElement}`"
         :title="translate('CoreHome_DataTableHowToSearch')"
         type="text"
         class="dataTableSearchInput"
@@ -149,7 +149,7 @@
     </a>
 
     <ul
-      :id="`dropdownConfigure${randomIdForDropdown}`"
+      :id="`dropdownConfigure${randomIdForElement}`"
       class="dropdown-content tableConfiguration"
     >
       <li v-if="showFlattenTable">
@@ -199,7 +199,7 @@
       href=""
       @click.prevent
       :title="translate('CoreHome_ChangePeriod')"
-      :data-target="`dropdownPeriods${randomIdForDropdown}`"
+      :data-target="`dropdownPeriods${randomIdForElement}`"
     >
       <div>
         <span class="icon-calendar"></span>
@@ -210,7 +210,7 @@
     </a>
     <ul
       v-if="showPeriods"
-      :id="`dropdownPeriods${randomIdForDropdown}`"
+      :id="`dropdownPeriods${randomIdForElement}`"
       class="dropdown-content dataTablePeriods"
     >
       <li v-for="selectablePeriod in selectablePeriods" :key="selectablePeriod">
@@ -344,7 +344,7 @@ export default defineComponent({
     },
   },
   computed: {
-    randomIdForDropdown(): number {
+    randomIdForElement(): number {
       return Math.floor(Math.random() * 999999);
     },
     allFooterIcons(): FooterIcon[] {
