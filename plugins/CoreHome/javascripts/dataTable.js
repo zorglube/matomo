@@ -208,7 +208,8 @@ $.extend(DataTable.prototype, UIControl.prototype, {
             'include_aggregate_rows',
             'totalRows',
             'pivotBy',
-            'pivotByColumn'
+            'pivotByColumn',
+            'filter_trigger_id'
         ];
 
         for (var key = 0; key < filters.length; key++) {
@@ -832,6 +833,9 @@ $.extend(DataTable.prototype, UIControl.prototype, {
         }
         currentPattern = piwikHelper.htmlDecode(currentPattern);
 
+        var filtersToRestore = self.resetAllFilters();
+        self.param.filter_trigger_id = filtersToRestore.filter_trigger_id;
+
         var patternsToReplace = [{from: '?', to: '\\?'}, {from: '+', to: '\\+'}, {from: '*', to: '\\*'}]
 
         $.each(patternsToReplace, function (index, pattern) {
@@ -893,14 +897,36 @@ $.extend(DataTable.prototype, UIControl.prototype, {
             $searchAction.addClass('searchActive forceActionVisible');
             var width = getOptimalWidthForSearchField();
             $searchAction.css('width', width + 'px');
-            $searchAction.find('.dataTableSearchInput').focus();
+
+            if (typeof self.param.filter_trigger_id != "undefined"
+                && self.param.filter_trigger_id.length > 0) {
+                var triggerField = document.getElementById(self.param.filter_trigger_id);
+                if (triggerField) {
+                    triggerField.focus();
+                }
+            } else {
+
+            }
 
             $searchAction.find('.icon-search').on('click', searchForPattern);
             $searchAction.off('click', showSearch);
         }
 
-        function searchForPattern() {
-            var keyword = $searchInput.val();
+        function searchForPattern(event) {
+            var keyword = '';
+            if (event) {
+                var $input;
+                if (event.target.tagName.toLowerCase() === 'input') {
+                    $input = $(event.target);
+                } else if (event.target.tagName.toLowerCase() === 'span') {
+                    $input = $(event.target).siblings('input');
+                }
+
+                if ($input && $input.length) {
+                    keyword = $input.val();
+                    self.param.filter_trigger_id = $input.attr('id');
+                }
+            }
 
             if (!keyword && !currentPattern) {
                 // we search only if a keyword is actually given, or if no keyword is given and a search was performed
@@ -932,7 +958,7 @@ $.extend(DataTable.prototype, UIControl.prototype, {
 
         $searchInput.on("keyup", function (e) {
             if (isEnterKey(e)) {
-                searchForPattern();
+                searchForPattern(e);
             } else if (isEscapeKey(e)) {
                 $searchAction.find('.icon-close').click();
             }
