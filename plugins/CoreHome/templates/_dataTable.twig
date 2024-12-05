@@ -53,7 +53,7 @@
         {% else %}
             {% if properties.show_footer %}
                 <div class="dataTableControls dataTableControls--top">
-                    {% include "@CoreHome/_dataTableActions.twig" %}
+                    {% include "@CoreHome/_dataTableActions.twig" with { placement: 'top' } %}
                 </div>
             {% endif %}
 
