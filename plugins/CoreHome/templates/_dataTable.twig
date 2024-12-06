@@ -6,7 +6,7 @@
 
 {% set showCardAsContentBlock = (properties.show_as_content_block and properties.show_title and not isWidget) %}
 {% set showOnlyTitleWithoutCard = not showCardAsContentBlock and properties.title and properties.show_title %}
-{% set showTableActionsInHeader = properties.show_footer and properties.show_footer_icons %}
+{% set showTableActionsInHeader = properties.show_footer and properties.show_footer_icons and not isDataTableEmpty %}
 
 {% if showCardAsContentBlock  %}
 <div class="card">
