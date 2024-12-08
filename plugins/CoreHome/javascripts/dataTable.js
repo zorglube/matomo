@@ -905,7 +905,7 @@ $.extend(DataTable.prototype, UIControl.prototype, {
                     triggerField.focus();
                 }
             } else {
-
+                $(event.target).siblings('input').focus();
             }
 
             $searchAction.find('.icon-search').on('click', searchForPattern);
