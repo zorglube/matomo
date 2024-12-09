@@ -1513,7 +1513,7 @@ $.extend(DataTable.prototype, UIControl.prototype, {
                     self.param.idSubtable = idSubTable;
                     self.param.action = self.props.subtable_controller_action;
 
-					delete self.param.totalRows;
+					          delete self.param.totalRows;
 
                     var extraParams = {};
                     extraParams.comparisonIdSubtables = self.getComparisonIdSubtables($(this));
