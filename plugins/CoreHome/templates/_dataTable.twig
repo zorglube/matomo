@@ -52,8 +52,10 @@
             <div vue-entry="CoreHome.Alert" severity="danger">{{ error.message }}</div>
         {% else %}
             {% if showTableActionsInHeader %}
-                <div class="dataTableControls dataTableControls--top">
-                    {% include "@CoreHome/_dataTableActions.twig" with { placement: 'top' } %}
+                <div class="row">
+                    <div class="col dataTableControls dataTableControls--top">
+                        {% include "@CoreHome/_dataTableActions.twig" with { placement: 'top' } %}
+                    </div>
                 </div>
             {% endif %}
 
