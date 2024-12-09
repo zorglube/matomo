@@ -833,9 +833,6 @@ $.extend(DataTable.prototype, UIControl.prototype, {
         }
         currentPattern = piwikHelper.htmlDecode(currentPattern);
 
-        var filtersToRestore = self.resetAllFilters();
-        self.param.filter_trigger_id = filtersToRestore.filter_trigger_id;
-
         var patternsToReplace = [{from: '?', to: '\\?'}, {from: '+', to: '\\+'}, {from: '*', to: '\\*'}]
 
         $.each(patternsToReplace, function (index, pattern) {
