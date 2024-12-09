@@ -639,14 +639,6 @@ td.cellSubDataTable .loadingPiwik {
     }
   }
 
-  &--top {
-    margin: -10px auto;
-
-    #dashboardWidgetsArea .widget & {
-      display: none;
-    }
-  }
-
   .activatePeriodsSelection {
     width:auto;
     text-align:left;
@@ -656,6 +648,14 @@ td.cellSubDataTable .loadingPiwik {
 .widgetContent {
   div.dataTableScroller {
     overflow-x: scroll;
+  }
+}
+.dataTableHeaderControls {
+  margin-top: -10px;
+  margin-bottom: 5px;
+
+  #dashboardWidgetsArea .widget & {
+    display: none;
   }
 }
 

@@ -6,6 +6,12 @@
 
 {% set showCardAsContentBlock = (properties.show_as_content_block and properties.show_title and not isWidget) %}
 {% set showOnlyTitleWithoutCard = not showCardAsContentBlock and properties.title and properties.show_title %}
+
+{#
+using the show_footer to control the header actions as well since this is going to be refactored with the goal
+of moving the table actions to the top of the report for all reports, at which point the config for the report
+can be renamed to show_header and show_header_icons
+#}
 {% set showTableActionsInHeader = properties.show_footer and properties.show_footer_icons and not isDataTableEmpty %}
 
 {% if showCardAsContentBlock  %}
@@ -52,8 +58,8 @@
             <div vue-entry="CoreHome.Alert" severity="danger">{{ error.message }}</div>
         {% else %}
             {% if showTableActionsInHeader %}
-                <div class="row">
-                    <div class="col dataTableControls dataTableControls--top">
+                <div class="row dataTableHeaderControls">
+                    <div class="col dataTableControls">
                         {% include "@CoreHome/_dataTableActions.twig" with { placement: 'top' } %}
                     </div>
                 </div>
