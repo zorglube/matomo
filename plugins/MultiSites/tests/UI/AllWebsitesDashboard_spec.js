@@ -293,4 +293,22 @@ describe('AllWebsitesDashboard', function () {
             expect(await page.screenshotSelector('#main')).to.matchImage('evolution_change');
         });
     });
+
+    describe('Responsive View', function () {
+        this.title = parentSuite.title; // to make sure the screenshot prefix is the same
+
+        it('should display correctly in tablet view', async function () {
+            await page.webpage.setViewport({ width: 768, height: 1024 });
+            await page.goto(dashboardUrl);
+            await page.waitForNetworkIdle();
+
+            expect(await page.screenshotSelector('#main')).to.matchImage('dashboard_tablet');
+        });
+
+        it('should display correctly in mobile view', async function () {
+            await page.webpage.setViewport({ width: 352, height: 1024 });
+
+            expect(await page.screenshotSelector('#main')).to.matchImage('dashboard_mobile');
+        });
+    });
 });
