@@ -352,7 +352,64 @@
     }
   }
 
+  @media all and (max-width: 1300px) {
+    .kpiCardContainer {
+      margin: 0 10px 20px 10px;
+    }
+  }
+
+  @media all and (max-width: 1200px) {
+    .kpiCardContainer {
+      flex-wrap: wrap;
+
+      .kpiCard {
+        flex-basis: calc(~'50% - 1px');
+        padding: 0 96px!important;
+      }
+
+      .kpiCardDivider {
+        &:nth-child(4) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .kpiCardContainer {
+      .kpiCard {
+        padding: 0 9%!important;
+      }
+    }
+  }
+
   @media all and (max-width: 600px) {
+    .dashboardHeader {
+      margin-bottom: 12px;
+    }
+
+    .kpiCardContainer {
+      margin-left: 8px;
+      margin-right: 8px;
+
+      .kpiCard {
+        flex-basis: 100%;
+        padding: 0!important;
+
+        .kpiCardValue {
+          font-size: 2rem;
+        }
+      }
+
+      .kpiCardDivider {
+        display: block!important;
+        background-image: url('plugins/MultiSites/images/kpi_divider_horizontal.svg');
+        height: 1px;
+        width: 100%;
+        margin: 4px 0;
+      }
+    }
+
     #periodString {
       width: 100%;
     }
@@ -379,11 +436,6 @@
         max-width: none;
         width: 100%;
       }
-    }
-
-    .kpiCardContainer {
-      margin-left: 20px;
-      margin-right: 20px;
     }
   }
 }
