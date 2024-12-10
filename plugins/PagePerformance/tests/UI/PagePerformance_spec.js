@@ -111,7 +111,7 @@ describe("PagePerformance", function () {
         await page.goto("?module=Widgetize&action=iframe&disableLink=0&widget=1&moduleToWidgetize=Actions&actionToWidgetize=getPageUrls&" + generalParams);
 
         // hover visualization selection
-        const icon = await page.jQuery('.activateVisualizationSelection');
+        const icon = await page.jQuery('.activateVisualizationSelection:last');
         await icon.click();
         await page.waitForTimeout(500); // animation
 

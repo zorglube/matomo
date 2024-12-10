@@ -197,7 +197,7 @@ describe("EvolutionGraph", function () {
         });
         await page.reload();
         await showDataTableFooter();
-        await page.click('.activatePeriodsSelection');
+        await page.click('.activatePeriodsSelection:last');
 
         await page.mouse.move(-10, -10);
         await page.waitForTimeout(500); // wait for animation
