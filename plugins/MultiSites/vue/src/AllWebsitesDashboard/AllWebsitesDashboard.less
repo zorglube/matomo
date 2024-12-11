@@ -129,23 +129,16 @@
     align-items: flex-start;
     display: flex;
     justify-content: space-between;
-    margin: 0 40px 20px 40px;
+    margin: 0 0 20px;
     overflow-x: auto;
 
     .kpiCard {
+      display: grid;
       flex-basis: 0;
       flex-grow: 1;
       margin: 20px 0;
-      padding: 0 40px;
-      white-space: nowrap;
-
-      &:first-child {
-        padding-left: 0;
-      }
-
-      &:last-child {
-        padding-right: 0;
-      }
+      padding: 0;
+      justify-items: center;
     }
 
     .kpiCardLoading {
@@ -352,19 +345,12 @@
     }
   }
 
-  @media all and (max-width: 1300px) {
-    .kpiCardContainer {
-      margin: 0 10px 20px 10px;
-    }
-  }
-
-  @media all and (max-width: 1200px) {
+  @media all and (max-width: 1350px) {
     .kpiCardContainer {
       flex-wrap: wrap;
 
       .kpiCard {
         flex-basis: calc(~'50% - 1px');
-        padding: 0 96px!important;
       }
 
       .kpiCardDivider {
@@ -375,26 +361,16 @@
     }
   }
 
-  @media all and (max-width: 800px) {
-    .kpiCardContainer {
-      .kpiCard {
-        padding: 0 9%!important;
-      }
-    }
-  }
-
   @media all and (max-width: 600px) {
     .dashboardHeader {
       margin-bottom: 12px;
     }
 
     .kpiCardContainer {
-      margin-left: 8px;
-      margin-right: 8px;
-
       .kpiCard {
         flex-basis: 100%;
         padding: 0!important;
+        justify-items: flex-start;
 
         .kpiCardValue {
           font-size: 2rem;
