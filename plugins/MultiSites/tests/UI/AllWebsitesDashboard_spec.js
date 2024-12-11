@@ -302,6 +302,20 @@ describe('AllWebsitesDashboard', function () {
             await page.goto(dashboardUrl);
             await page.waitForNetworkIdle();
 
+            await page.evaluate(() => {
+              window.CoreHome.Matomo.on('MultiSites.DashboardKPIs.updated', function(data) {
+                data.kpis.badges.hits = '<strong>Plan:</strong> 600K hits/month';
+                data.kpis.badges.pageviews = 'Weird Pageview Badge';
+                data.kpis.badges.revenue = 'Awesome Revenue Badge';
+                data.kpis.badges.visits = 'Terrific Visits Badge';
+              })
+            });
+
+            // change period to trigger reload of KPIS
+            await page.click('.move-period-prev');
+            await page.click('.move-period-next');
+            await page.waitForNetworkIdle();
+
             expect(await page.screenshotSelector('#main')).to.matchImage('dashboard_tablet');
         });
 
