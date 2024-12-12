@@ -961,9 +961,13 @@ $.extend(DataTable.prototype, UIControl.prototype, {
             }
         });
 
+        const $dataTable = $searchInput.parents('.dataTable').first();
         if (currentPattern) {
+            $dataTable.addClass('hasSearchKeyword');
             $searchInput.val(currentPattern);
             $searchAction.click();
+        } else {
+            $dataTable.removeClass('hasSearchKeyword');
         }
 
         if (this.isEmpty && !currentPattern) {

@@ -655,7 +655,8 @@ td.cellSubDataTable .loadingPiwik {
   margin-bottom: 5px;
 
   .widgetpreview-preview .widget &,
-  #dashboardWidgetsArea .widget & {
+  #dashboardWidgetsArea .widget &,
+  .dataTable.isDataTableEmpty:not(.hasSearchKeyword) & {
     display: none;
   }
 }
@@ -688,6 +689,12 @@ td.cellSubDataTable .loadingPiwik {
       &.forceActionVisible {
         visibility: visible;
       }
+    }
+  }
+  .theWidgetContent .isDataTableEmpty.hasSearchKeyword {
+    .limitSelection,
+    .dataTableControls .dataTableAction {
+      visibility: visible;
     }
   }
 }
