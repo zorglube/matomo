@@ -1262,10 +1262,15 @@ $.extend(DataTable.prototype, UIControl.prototype, {
         if ((typeof self.numberOfSubtables == 'undefined' || self.numberOfSubtables == 0)
             && (typeof self.param.flat == 'undefined' || self.param.flat != 1)
         ) {
-            // if there are no subtables, remove the flatten action
-            const dataTableActionsVueApp = $('[vue-entry="CoreHome.DataTableActions"]', domElem).data('vueAppInstance');
-            if (dataTableActionsVueApp) {
-              dataTableActionsVueApp.showFlattenTable_ = false;
+            // if there are no subtables, remove the flatten action from all data table actions
+            const dataTableActionsVueApps = $('[vue-entry="CoreHome.DataTableActions"]', domElem);
+            if (dataTableActionsVueApps.length) {
+              dataTableActionsVueApps.each(function() {
+                const appData = $(this).data('vueAppInstance');
+                if (appData) {
+                  appData.showFlattenTable_ = false;
+                }
+              });
             }
         }
 
