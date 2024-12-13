@@ -137,8 +137,7 @@
       flex-basis: 0;
       flex-grow: 1;
       margin: 20px 0;
-      padding: 0;
-      justify-items: center;
+      padding: 0 3vw;
     }
 
     .kpiCardLoading {
@@ -184,8 +183,14 @@
     }
 
     .kpiCardEvolution {
+      display: table;
       color: #76838f;
       font-size: 0.9rem;
+      line-height: 1rem;
+
+      &>span {
+        display: table-cell;
+      }
     }
 
     .kpiCardEvolutionIcon {
@@ -194,6 +199,8 @@
 
     .kpiCardEvolutionTrend {
       font-size: 1rem;
+      white-space: nowrap;
+      vertical-align: middle;
     }
 
     .kpiTrendNegative {
@@ -352,6 +359,7 @@
       .kpiCard {
         flex-basis: calc(~'50% - 1px');
         max-width: calc(~'50% - 1px');
+        padding: 0 7vw;
       }
 
       .kpiCardDivider {
