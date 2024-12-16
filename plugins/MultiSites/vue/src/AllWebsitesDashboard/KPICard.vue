@@ -7,37 +7,35 @@
 
 <template>
   <div class="kpiCard">
-    <div class="kpiCardContent">
-      <div class="kpiCardTitle">
-        <span :class="`kpiCardIcon ${kpi.icon}`" />
-        {{ translate(kpi.title) }}
-      </div>
-
-      <div class="kpiCardValue"
-           :title="kpi.valueCompact !== kpi.value ? kpi.value : ''"
-      >{{ kpi.valueCompact }}</div>
-
-      <div class="kpiCardEvolution">
-        <template v-if="kpi.evolutionValue !== ''">
-          <span :class="`kpiCardEvolutionTrend ${evolutionTrendClass}`">
-            <span :class="`kpiCardEvolutionIcon ${evolutionTrendIcon}`" />
-            {{ kpi.evolutionValue }}&nbsp;
-          </span>
-          <span>{{ translate(evolutionTrendFrom) }}</span>
-        </template>
-
-        <template v-else>
-          <div class="kpiCardEvolution">
-            <span class="kpiCardEvolutionTrend">&nbsp;</span>
-          </div>
-        </template>
-      </div>
-
-      <div v-if="kpi.badge"
-           v-html="$sanitize(kpi.badge)"
-           class="kpiCardBadge"
-      ></div>
+    <div class="kpiCardTitle">
+      <span :class="`kpiCardIcon ${kpi.icon}`" />
+      {{ translate(kpi.title) }}
     </div>
+
+    <div class="kpiCardValue"
+         :title="kpi.valueCompact !== kpi.value ? kpi.value : ''"
+    >{{ kpi.valueCompact }}</div>
+
+    <div class="kpiCardEvolution">
+      <template v-if="kpi.evolutionValue !== ''">
+        <span :class="`kpiCardEvolutionTrend ${evolutionTrendClass}`">
+          <span :class="`kpiCardEvolutionIcon ${evolutionTrendIcon}`" />
+          {{ kpi.evolutionValue }}&nbsp;
+        </span>
+        <span>{{ translate(evolutionTrendFrom) }}</span>
+      </template>
+
+      <template v-else>
+        <div class="kpiCardEvolution">
+          <span class="kpiCardEvolutionTrend">&nbsp;</span>
+        </div>
+      </template>
+    </div>
+
+    <div v-if="kpi.badge"
+         v-html="$sanitize(kpi.badge)"
+         class="kpiCardBadge"
+    ></div>
   </div>
 </template>
 
