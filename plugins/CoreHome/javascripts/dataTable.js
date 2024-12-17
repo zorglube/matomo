@@ -851,8 +851,8 @@ $.extend(DataTable.prototype, UIControl.prototype, {
 
         var $searchInput = $('.dataTableSearchInput', domElem);
 
-        function getOptimalWidthForSearchField() {
-            var controlBarWidth = $('.dataTableControls', domElem).width();
+        function getOptimalWidthForSearchField($searchAction) {
+            var controlBarWidth = $searchAction.parents('.dataTableControls').first().width();
             var spaceLeft = controlBarWidth - $searchAction.position().left;
             var idealWidthForSearchBar = 250;
             var minimalWidthForSearchBar = 150; // if it's only 150 pixel we still show it on same line
@@ -890,19 +890,21 @@ $.extend(DataTable.prototype, UIControl.prototype, {
             event.preventDefault();
             event.stopPropagation();
 
+            var triggerField;
+            if (typeof self.param.filter_trigger_id != "undefined"
+              && self.param.filter_trigger_id.length > 0) {
+              triggerField = document.getElementById(self.param.filter_trigger_id);
+            } else if (event && event.target) {
+              triggerField = $(event.target).siblings('input');
+            }
+
             var $searchAction = $(this);
             $searchAction.addClass('searchActive forceActionVisible');
-            var width = getOptimalWidthForSearchField();
+            var width = getOptimalWidthForSearchField($searchAction);
             $searchAction.css('width', width + 'px');
 
-            if (typeof self.param.filter_trigger_id != "undefined"
-                && self.param.filter_trigger_id.length > 0) {
-                var triggerField = document.getElementById(self.param.filter_trigger_id);
-                if (triggerField) {
-                    triggerField.focus();
-                }
-            } else {
-                $(event.target).siblings('input').focus();
+            if (triggerField) {
+              triggerField.focus();
             }
 
             $searchAction.find('.icon-search').on('click', searchForPattern);
